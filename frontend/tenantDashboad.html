@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Dashboard — Cherry Smart Homes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/pages/tenant-dashboard.css">
+
+</head>
+<body class="tenant-dashboard-page">
+
+<div class="dash-shell">
+<aside class="dash-sidebar">
+ <a href="index.html" class="logo">
+      <img width="205" src="logo.png" alt="Cherry Smart Homes">
+      <!-- <span class="logo-text"><span class="l1">Cherry</span><span class="l2">Smart Homes</span></span> -->
+    </a>
+  <div class="dash-nav-label">Menu</div>
+  <nav class="dash-nav">
+    <a href="tenantDashboad.html" class="active"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg> Overview </a>
+    <a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M9 8h6M9 12h6M9 16h3"/></svg> My Lease </a>
+    <a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg> Payments </a>
+    <a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.7 6.3a4 4 0 0 1-5.4 5.4L4 17v3h3l5.3-5.3a4 4 0 0 1 5.4-5.4l-3 3-2-2 3-3z"/></svg> Maintenance Requests <span class="badge-count">1</span></a>
+    <a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg> Messages </a>
+  </nav>
+  <div class="dash-nav-label">Account</div>
+  <nav class="dash-nav">
+    <a href="#"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg> Settings </a>
+    <a href="tenant-portal.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg> Log Out </a>
+  </nav>
+</aside>
+  <main class="dash-main">
+<div class="dash-topbar">
+  <div style="display:flex; align-items:center; gap:14px;">
+    <button class="dash-sidebar-toggle" aria-label="Open menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/></svg></button>
+    <h1>My Dashboard</h1>
+  </div>
+  <div class="dash-topbar-right">
+    <button class="dash-icon-btn" aria-label="Notifications"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg><span class="dot"></span></button>
+    <div class="dash-user">
+      <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=200&auto=format&fit=crop" alt="Brian Otieno">
+      <div>
+        <div class="name">Brian Otieno</div>
+        <div class="role">Tenant</div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="dash-content">
+<div class="dash-welcome">
+  <h2>Welcome back, Brian 👋</h2>
+  <p>Here's a summary of your lease and account with Cherry Smart Homes.</p>
+</div>
+
+<div class="dash-stats">
+  <div class="dash-stat-card">
+    <div class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></div>
+    <div class="val">8 mo</div>
+    <div class="lbl">Remaining on Lease</div>
+  </div>
+  <div class="dash-stat-card">
+    <div class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></div>
+    <div class="val">KES 47,000</div>
+    <div class="lbl">Rent Due Aug 1</div>
+    <div class="trend warn">Due in 6 days</div>
+  </div>
+  <div class="dash-stat-card">
+    <div class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.7 6.3a4 4 0 0 1-5.4 5.4L4 17v3h3l5.3-5.3a4 4 0 0 1 5.4-5.4l-3 3-2-2 3-3z"/></svg></div>
+    <div class="val">1</div>
+    <div class="lbl">Open Maintenance Request</div>
+  </div>
+  <div class="dash-stat-card">
+    <div class="icon-wrap"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
+    <div class="val">0</div>
+    <div class="lbl">Unread Messages</div>
+  </div>
+</div>
+
+<div class="quick-actions" style="margin-bottom:30px;">
+  <div class="quick-action-card">
+    <div class="qi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/><circle cx="7" cy="15" r="1.2" fill="currentColor" stroke="none"/></svg></div>
+    <h4>Pay Rent via M-Pesa</h4>
+    <p>KES 47,000 due Aug 1, 2026</p>
+    <button class="btn btn-red" id="pay-rent-btn">Pay Now</button>
+  </div>
+  <div class="quick-action-card">
+    <div class="qi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.7 6.3a4 4 0 0 1-5.4 5.4L4 17v3h3l5.3-5.3a4 4 0 0 1 5.4-5.4l-3 3-2-2 3-3z"/></svg></div>
+    <h4>Raise a Request</h4>
+    <p>Report a maintenance issue in your unit</p>
+    <button class="btn btn-outline" id="new-request-btn">New Request</button>
+  </div>
+  <div class="quick-action-card">
+    <div class="qi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
+    <h4>Message Landlord</h4>
+    <p>Get in touch about your tenancy</p>
+    <a href="https://api.whatsapp.com/send?phone=254700123456&text=Hi%2C%20this%20is%20Brian%20Otieno%2C%20your%20tenant%20at%20Westlands." target="_blank" rel="noopener" class="btn btn-outline">WhatsApp</a>
+  </div>
+</div>
+
+<div class="dash-panel">
+  <div class="dash-panel-head"><h3>Lease Summary</h3></div>
+  <div class="dash-panel-body" style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px;">
+    <div><div style="font-size:11.5px; color:var(--muted); margin-bottom:4px; text-transform:uppercase; letter-spacing:.03em;">Property</div><div style="font-weight:700; color:var(--ink); font-size:14px;">2 Bedroom Apartment, Westlands</div></div>
+    <div><div style="font-size:11.5px; color:var(--muted); margin-bottom:4px; text-transform:uppercase; letter-spacing:.03em;">Lease Start</div><div style="font-weight:700; color:var(--ink); font-size:14px;">Dec 1, 2025</div></div>
+    <div><div style="font-size:11.5px; color:var(--muted); margin-bottom:4px; text-transform:uppercase; letter-spacing:.03em;">Lease End</div><div style="font-weight:700; color:var(--ink); font-size:14px;">Nov 30, 2026</div></div>
+    <div><div style="font-size:11.5px; color:var(--muted); margin-bottom:4px; text-transform:uppercase; letter-spacing:.03em;">Monthly Rent</div><div style="font-weight:700; color:var(--ink); font-size:14px;">KES 47,000</div></div>
+    <div><div style="font-size:11.5px; color:var(--muted); margin-bottom:4px; text-transform:uppercase; letter-spacing:.03em;">Landlord</div><div style="font-weight:700; color:var(--ink); font-size:14px;">Managed by Cherry Smart Homes</div></div>
+    <div><div style="font-size:11.5px; color:var(--muted); margin-bottom:4px; text-transform:uppercase; letter-spacing:.03em;">Deposit Held</div><div style="font-weight:700; color:var(--ink); font-size:14px;">KES 47,000</div></div>
+  </div>
+</div>
+
+<div class="dash-panel">
+  <div class="dash-panel-head"><h3>Payment History</h3></div>
+  <table class="dash-table">
+    <thead><tr><th>Month</th><th>Amount</th><th>Method</th><th>Date Paid</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td class="title-cell">July 2026</td><td>KES 47,000</td><td>M-Pesa</td><td>Jul 1, 2026</td><td><span class="status-pill paid">Paid</span></td></tr>
+      <tr><td class="title-cell">June 2026</td><td>KES 47,000</td><td>M-Pesa</td><td>Jun 1, 2026</td><td><span class="status-pill paid">Paid</span></td></tr>
+      <tr><td class="title-cell">May 2026</td><td>KES 47,000</td><td>M-Pesa</td><td>May 2, 2026</td><td><span class="status-pill paid">Paid</span></td></tr>
+      <tr><td class="title-cell">August 2026</td><td>KES 47,000</td><td>—</td><td>—</td><td><span class="status-pill pending">Due Aug 1</span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="dash-panel">
+  <div class="dash-panel-head"><h3>Maintenance Requests</h3></div>
+  <table class="dash-table">
+    <thead><tr><th>Issue</th><th>Submitted</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td class="title-cell">Kitchen tap leaking</td><td>Jul 15, 2026</td><td><span class="status-pill in-progress">In Progress</span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Pay Rent modal -->
+<div class="modal-overlay" id="pay-rent-modal">
+  <div class="modal-card">
+    <button class="modal-close" data-close-pay-modal aria-label="Close">✕</button>
+    <h3>Pay Rent via M-Pesa</h3>
+    <p>KES 47,000 due for August 2026. Enter your M-Pesa number to receive an STK push.</p>
+    <form onsubmit="return false;" id="pay-rent-form">
+      <div class="form-field">
+        <label for="pr-phone">M-Pesa Phone Number</label>
+        <input id="pr-phone" type="tel" placeholder="07XX XXX XXX" required>
+      </div>
+      <button type="submit" class="btn btn-red" style="width:100%; justify-content:center;">Send Payment Request</button>
+    </form>
+  </div>
+</div>
+
+<!-- New Maintenance Request modal -->
+<div class="modal-overlay" id="new-request-modal">
+  <div class="modal-card">
+    <button class="modal-close" data-close-request-modal aria-label="Close">✕</button>
+    <h3>Raise a Maintenance Request</h3>
+    <p>Describe the issue and our team will schedule a technician.</p>
+    <form onsubmit="return false;" id="new-request-form">
+      <div class="form-field">
+        <label for="mr-category">Category</label>
+        <select id="mr-category" style="width:100%; padding:12px 14px; border:1px solid var(--line); border-radius:6px; font-size:14px; font-family:inherit;">
+          <option>Plumbing</option>
+          <option>Electrical</option>
+          <option>Appliances</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label for="mr-desc">Description</label>
+        <input id="mr-desc" type="text" placeholder="Briefly describe the issue" required>
+      </div>
+      <button type="submit" class="btn btn-red" style="width:100%; justify-content:center;">Submit Request</button>
+    </form>
+  </div>
+</div>
+
+    </div>
+  </main>
+</div>
+
+</body>
+</html>

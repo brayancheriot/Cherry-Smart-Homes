@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Short Stay Property — Cherry Smart Homes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/pages/bnb-detail.css">
+
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav-wrap">
+    <a href="index.html" class="logo">
+      <svg class="mark" viewBox="0 0 24 24" fill="none"><path d="M3 11L12 3L21 11" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 10V20H19V10" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 20V14H14V20" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="logo-text"><span class="l1">Cherry</span><span class="l2">Smart Homes</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Find a Home</a>
+      <a href="properties.html">Properties for Sale</a>
+      <a href="bnb.html" class="active">Short Stays</a>
+      <a href="for-landlords.html">For Landlords</a>
+      <a href="about%20us.html#contact">Our Office</a>
+      <a href="tenant-portal.html" class="tenant-portal-link">Tenant Portal</a>
+    </nav>
+    <div class="nav-right">
+      <a href="https://api.whatsapp.com/send?phone=254700123456&text=Hi%2C%20I%27d%20like%20to%20learn%20more%20about%20your%20properties." target="_blank" rel="noopener" class="whatsapp-nav-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.1 8.1 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+        <span class="full">Talk to Us on WhatsApp</span>
+      </a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="breadcrumb-bar">
+  <div class="container breadcrumb">
+    <a href="index.html">Home</a>
+    <span class="sep">›</span>
+    <a href="bnb.html">Short Stays</a>
+    <span class="sep">›</span>
+    <span class="current" id="bnb-breadcrumb-title">Loading...</span>
+  </div>
+</div>
+
+<section class="section" style="padding-top:0;">
+  <div class="container">
+
+    <p class="modal-error" id="bnb-page-error" style="display:none; margin-top:20px;"></p>
+
+    <div id="bnb-detail-root" style="display:none;">
+      <div class="bnb-detail-hero">
+        <img id="bnb-hero-img" src="" alt="">
+      </div>
+
+      <div class="bnb-detail-grid">
+        <div>
+          <div class="bnb-detail-header">
+            <h1 id="bnb-title">—</h1>
+            <div class="loc-line">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
+              <span id="bnb-location">—</span>
+            </div>
+          </div>
+
+          <div class="bnb-quick-specs">
+            <div class="qs"><div class="qs-val" id="bnb-guests-val">—</div><div class="qs-lbl">Max Guests</div></div>
+            <div class="qs"><div class="qs-val" id="bnb-bedrooms-val">—</div><div class="qs-lbl">Bedrooms</div></div>
+            <div class="qs"><div class="qs-val" id="bnb-bathrooms-val">—</div><div class="qs-lbl">Bathrooms</div></div>
+          </div>
+
+          <div class="bnb-section">
+            <h2>About This Place</h2>
+            <p id="bnb-description">—</p>
+          </div>
+
+          <div class="bnb-section">
+            <h2>Amenities</h2>
+            <div class="bnb-amenities-grid" id="bnb-amenities-grid"></div>
+          </div>
+        </div>
+
+        <aside class="booking-widget">
+          <div class="bw-price"><span id="bw-price-amount">—</span> <span>/ night</span></div>
+
+          <p class="bw-error" id="bw-error"></p>
+
+          <div class="bw-date-row">
+            <div class="bw-date-field">
+              <label for="bw-checkin">Check-in</label>
+              <input id="bw-checkin" type="date">
+            </div>
+            <div class="bw-date-field">
+              <label for="bw-checkout">Check-out</label>
+              <input id="bw-checkout" type="date">
+            </div>
+          </div>
+
+          <div class="bw-guests-field">
+            <label for="bw-guests">Guests</label>
+            <input id="bw-guests" type="number" min="1" value="1">
+          </div>
+
+          <div class="bw-summary" id="bw-summary">
+            <div class="bw-summary-row"><span id="bw-summary-nights-label">— nights</span><span id="bw-summary-nights-amount">KES —</span></div>
+            <div class="bw-summary-total"><span>Total</span><span id="bw-summary-total">KES —</span></div>
+          </div>
+
+          <form onsubmit="return false;" id="bnb-booking-form">
+            <div class="bw-guest-fields">
+              <div class="form-field">
+                <label for="bw-name">Full Name</label>
+                <input id="bw-name" type="text" placeholder="Your name" required>
+              </div>
+              <div class="form-field">
+                <label for="bw-phone">Phone Number</label>
+                <input id="bw-phone" type="tel" placeholder="07XX XXX XXX" required>
+              </div>
+              <div class="form-field">
+                <label for="bw-email">Email (optional)</label>
+                <input id="bw-email" type="email" placeholder="you@example.com">
+              </div>
+            </div>
+            <button type="submit" class="btn btn-red" id="bw-submit-btn">Request to Book</button>
+          </form>
+        </aside>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-col">
+      <div class="footer-logo">
+        <svg class="mark" viewBox="0 0 24 24" fill="none"><path d="M3 11L12 3L21 11" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M5 10V20H19V10" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
+        <span><span class="l1">Cherry Smart Homes</span></span>
+      </div>
+      <p>Smart property management and modern living in Kenya. Verified rentals, transparent pricing, and a dashboard built for landlords and tenants alike.</p>
+      <div class="socials">
+        <a href="#" aria-label="Facebook">f</a><a href="#" aria-label="Twitter">𝕏</a><a href="#" aria-label="Instagram">◎</a><a href="#" aria-label="LinkedIn">in</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Site</h5>
+      <ul>
+        <li><a href="index.html">Find a Home</a></li>
+        <li><a href="properties.html">Properties for Sale</a></li>
+        <li><a href="bnb.html">Short Stays</a></li>
+        <li><a href="for-landlords.html">For Landlords</a></li>
+        <li><a href="about%20us.html#contact">Our Office</a></li>
+        <li><a href="tenant-portal.html">Tenant Portal</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li>0700 123 456</li>
+        <li>hello@cherrysmarthomes.co.ke</li>
+        <li>Mon – Sat, 8:00 AM – 6:00 PM</li>
+      </ul>
+      <h5 style="margin-top:26px;">Legal</h5>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Use</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Visit Our Office</h5>
+      <div class="footer-map">Map view — Kindaruma Road, Kilimani, Nairobi</div>
+      <p style="margin-bottom:0;">Kindaruma Road, Kilimani, Nairobi, Kenya</p>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© 2024 Cherry Smart Homes Ltd. All Rights Reserved.</span>
+    <div class="links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Use</a>
+      <a href="#">Sitemap</a>
+    </div>
+  </div>
+</footer>
+
+<a class="whatsapp-float" href="https://api.whatsapp.com/send?phone=254700123456&text=Hi,%20I'd%20like%20to%20book%20a%20viewing." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.1 8.1 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+</a>
+<button class="book-viewing-float" data-open-booking-modal>
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>
+  <span class="label-full">Book a Viewing</span>
+</button>
+
+<div class="modal-overlay" id="booking-modal">
+  <div class="modal-card">
+    <button class="modal-close" data-close-booking-modal aria-label="Close">✕</button>
+    <h3>Book a Viewing</h3>
+    <p>Fill in your details and our team will call you to arrange a visit.</p>
+    <form onsubmit="return false;">
+      <div class="form-field">
+        <label for="bm-name">Full Name *</label>
+        <input id="bm-name" type="text" placeholder="Your name" required>
+      </div>
+      <div class="form-field">
+        <label for="bm-phone">Phone Number *</label>
+        <input id="bm-phone" type="tel" placeholder="07XX XXX XXX" required>
+      </div>
+      <div class="modal-btn-row">
+        <p class="modal-error" id="bm-error" style="display:none;"></p>
+        <button type="submit" class="btn btn-red">Book Viewing</button>
+        <a href="https://api.whatsapp.com/send?phone=254700123456&text=Hi%2C%20I%27d%20like%20to%20book%20a%20viewing." target="_blank" rel="noopener" class="btn btn-outline">WhatsApp Inquiry</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="assets/js/main.js"></script>
+<script src="assets/js/data/stays.js"></script>
+<script src="assets/js/pages/bnb-detail.js"></script>
+</body>
+</html>

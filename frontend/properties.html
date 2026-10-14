@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Properties for Sale in Nairobi — Cherry Smart Homes</title>
+<meta name="description" content="Browse verified homes for sale in Nairobi and surrounding areas. Filter by location, price and bedrooms, then enquire on WhatsApp.">
+<meta property="og:title" content="Properties for Sale — Cherry Smart Homes">
+<meta property="og:description" content="Verified homes for sale in Nairobi. Filter by location, price and bedrooms.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+
+<style>
+/* ===== Header (same as other pages) ===== */
+.csh-header,.pf-page{
+  --csh-green:#1f9d55;--csh-green-dark:#177a42;--csh-gold:#c8962b;
+  --csh-ink:#121a24;--csh-muted:#4b5563;--csh-line:#e5e7eb;
+  --csh-h:64px;--csh-radius:10px;
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--csh-ink)
+}
+.csh-header *,.pf-page *,.csh-header *::before,.pf-page *::before{box-sizing:border-box}
+.csh-header a,.pf-page a{text-decoration:none;color:inherit}
+.csh-header :focus-visible,.pf-page :focus-visible{outline:3px solid var(--csh-gold);outline-offset:2px;border-radius:6px}
+.csh-wrap{width:100%;max-width:1200px;margin:0 auto;padding:0 20px}
+.csh-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:var(--csh-radius);font:600 16px/1 Inter,sans-serif;border:1.5px solid transparent;cursor:pointer;text-align:center;transition:background .2s,color .2s,border-color .2s}
+.csh-btn-primary{background:var(--csh-green);color:#fff!important}
+.csh-btn-primary:hover{background:var(--csh-green-dark)}
+.csh-btn-outline{background:#fff;color:var(--csh-ink);border-color:var(--csh-ink)}
+.csh-btn-outline:hover{background:var(--csh-ink);color:#fff}
+.csh-header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid var(--csh-line);padding-top:env(safe-area-inset-top,0px)}
+.csh-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;height:var(--csh-h)}
+.csh-logo img{height:46px;width:auto}
+.csh-actions{display:flex;align-items:center;gap:8px}
+.csh-wa{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;min-width:44px;padding:0 12px;border-radius:var(--csh-radius);background:var(--csh-green);color:#fff!important;font-weight:600;font-size:14px}
+.csh-wa-text{display:none}
+.csh-header .nav-toggle{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;border:1px solid var(--csh-line);border-radius:var(--csh-radius);background:#fff;color:var(--csh-ink);cursor:pointer}
+.csh-nav{position:fixed;inset:calc(var(--csh-h) + env(safe-area-inset-top,0px)) 0 0 0;background:#fff;display:flex;flex-direction:column;padding:12px 20px calc(24px + env(safe-area-inset-bottom,0px));overflow-y:auto;transform:translateX(100%);visibility:hidden;transition:transform .25s ease,visibility .25s}
+.csh-nav.open{transform:none;visibility:visible}
+.csh-nav a{display:flex;align-items:center;min-height:56px;font-size:18px;font-weight:500;border-bottom:1px solid var(--csh-line)}
+.csh-nav a.active{color:var(--csh-green);font-weight:700}
+.csh-nav .csh-portal{margin-top:20px;justify-content:center;border:1.5px solid var(--csh-ink);border-radius:var(--csh-radius);font-size:16px;font-weight:600}
+body.csh-menu-open{overflow:hidden}
+
+/* ===== Sale page ===== */
+.pf-top{background:#f6f8f7;padding:28px 0 24px}
+.pf-top h1{margin:0 0 8px;font-size:clamp(1.8rem,6.5vw,2.8rem);line-height:1.1;font-weight:800;letter-spacing:-.02em}
+.pf-top p{margin:0;color:var(--csh-muted);max-width:60ch;line-height:1.6}
+.pf-crumbs{font-size:13px;color:var(--csh-muted);margin-bottom:10px}
+.pf-crumbs a:hover{color:var(--csh-green-dark)}
+
+/* Filters */
+.pf-filters{background:#fff;border-bottom:1px solid var(--csh-line);position:sticky;top:calc(var(--csh-h) + env(safe-area-inset-top,0px));z-index:50}
+.pf-filter-bar{display:flex;gap:10px;align-items:center;padding:10px 0}
+.pf-filter-toggle{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:1.5px solid var(--csh-ink);border-radius:var(--csh-radius);background:#fff;font:600 15px Inter,sans-serif;cursor:pointer}
+.pf-count{margin-left:auto;font-size:14px;color:var(--csh-muted);font-weight:500}
+.pf-panel{display:none;padding:4px 0 16px}
+.pf-panel.open{display:block}
+.pf-fields{display:grid;gap:12px;grid-template-columns:1fr}
+.pf-field label{display:block;margin-bottom:6px;font-size:13px;font-weight:600;color:var(--csh-muted)}
+.pf-field input,.pf-field select{width:100%;height:48px;margin:0;padding:0 14px;border:1.5px solid var(--csh-line);border-radius:var(--csh-radius);background:#fff;color:var(--csh-ink);font:500 16px Inter,sans-serif;appearance:none;-webkit-appearance:none}
+.pf-field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%234b5563' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:38px}
+.pf-field input:focus,.pf-field select:focus{border-color:var(--csh-green);outline:none;box-shadow:0 0 0 3px rgba(31,157,85,.18)}
+.pf-reset-m{display:inline-block}
+.pf-reset{margin-top:12px;background:none;border:0;padding:10px 0;color:var(--csh-green-dark);font:600 15px Inter,sans-serif;cursor:pointer;text-decoration:underline}
+
+/* Listings */
+.pf-list{padding:24px 0 56px}
+.pf-grid{display:grid;gap:18px;grid-template-columns:1fr}
+.pf-card{background:#fff;border:1px solid var(--csh-line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .2s,transform .2s}
+.pf-card:hover{box-shadow:0 12px 30px rgba(18,26,36,.1);transform:translateY(-2px)}
+.pf-img{position:relative;aspect-ratio:4/3;background:#e5e7eb}
+.pf-img img{width:100%;height:100%;object-fit:cover;display:block}
+.pf-badge{position:absolute;left:12px;top:12px;background:var(--csh-green);color:#fff;font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px}
+.pf-badge.new{background:var(--csh-gold)}
+.pf-save{position:absolute;right:10px;top:10px;width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.95);color:var(--csh-ink);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.pf-save[aria-pressed="true"]{color:#e11d48}
+.pf-save[aria-pressed="true"] svg{fill:currentColor}
+.pf-body{padding:16px;display:flex;flex-direction:column;gap:6px;flex:1}
+.pf-price{font-size:1.4rem;font-weight:800}
+.pf-title{margin:0;font-size:1rem;font-weight:600}
+.pf-loc{display:flex;align-items:center;gap:6px;color:var(--csh-muted);font-size:14px}
+.pf-specs{display:flex;flex-wrap:wrap;gap:6px 16px;margin:6px 0 10px;padding:10px 0;border-top:1px solid var(--csh-line);font-size:14px;color:var(--csh-muted)}
+.pf-specs span{display:inline-flex;align-items:center;gap:6px}
+.pf-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:auto}
+.pf-btns .csh-btn{min-height:46px;padding:0 10px;font-size:15px}
+.pf-empty{display:none;text-align:center;padding:56px 16px;border:1.5px dashed var(--csh-line);border-radius:14px}
+.pf-empty.show{display:block}
+.pf-empty h2{margin:0 0 8px;font-size:1.3rem}
+.pf-empty p{margin:0 0 16px;color:var(--csh-muted)}
+.pf-note{margin-top:28px;font-size:13px;color:var(--csh-muted)}
+
+/* Enquiry dialog */
+.pf-dialog{width:min(480px,calc(100% - 24px));max-height:calc(100% - 24px);padding:22px 20px;border:0;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.3);font-family:Inter,sans-serif;color:var(--csh-ink)}
+.pf-dialog::backdrop{background:rgba(18,26,36,.55)}
+.pf-dialog h3{margin:0 0 4px;font-size:1.25rem}
+.pf-dialog .ref{margin:0 0 14px;color:var(--csh-muted);font-size:14px}
+.pf-dialog form{display:grid;gap:12px}
+.pf-dialog .x{position:absolute;right:10px;top:10px;width:44px;height:44px;border:0;background:none;font-size:20px;cursor:pointer;color:var(--csh-muted)}
+
+@media (min-width:640px){
+  .csh-wa-text{display:inline}
+  .pf-fields{grid-template-columns:1fr 1fr}
+  .pf-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (min-width:992px){
+  .csh-header,.pf-page{--csh-h:76px}
+  .csh-logo img{height:54px}
+  .csh-header .nav-toggle{display:none}
+  .csh-nav{position:static;flex-direction:row;align-items:center;gap:6px;padding:0;overflow:visible;transform:none;visibility:visible;background:none}
+  .csh-nav a{min-height:44px;padding:0 12px;font-size:16px;border-bottom:0;border-radius:8px}
+  .csh-nav a:hover{background:#f3f4f6}
+  .csh-nav .csh-portal{margin:0 0 0 6px;padding:0 16px;font-size:15px}
+  .pf-top{padding:48px 0 36px}
+  .pf-filter-toggle{display:none}
+  .pf-panel{display:block;padding:14px 0}
+  .pf-filter-bar{display:none}
+  .pf-fields{grid-template-columns:1.4fr 1fr 1fr 1fr 1fr}
+  .pf-reset{margin-top:0}
+  .pf-reset-m{display:none}
+  .pf-desktop-meta{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
+  .pf-grid{grid-template-columns:repeat(3,1fr);gap:22px}
+}
+.pf-desktop-meta{display:none}
+@media (min-width:992px){.pf-desktop-meta{display:flex}}
+@media (prefers-reduced-motion:reduce){.csh-nav,.pf-card{transition:none}}
+</style>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="csh-header">
+  <div class="csh-wrap csh-bar">
+    <a href="index.html" class="csh-logo" aria-label="Cherry Smart Homes home">
+      <img src="logo.png" width="205" height="54" alt="Cherry Smart Homes — Find your next home">
+    </a>
+    <nav id="site-nav" class="csh-nav" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="properties.html" class="active" aria-current="page">Properties for Sale</a>
+      <a href="rentals.html">Rentals</a>
+      <a href="bnb.html">Airbnb</a>
+      <a href="for-landlords.html">For Landlords</a>
+      <a href="about%20us.html">About Us</a>
+      <a href="tenant-portal.html" class="csh-portal">Tenant Portal</a>
+    </nav>
+    <div class="csh-actions">
+      <a class="csh-wa" target="_blank" rel="noopener"
+         href="https://api.whatsapp.com/send?phone=254700123456&text=Hi%2C%20I%27d%20like%20to%20learn%20more%20about%20properties%20for%20sale."
+         aria-label="Chat with us on WhatsApp">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.1 8.1 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+        <span class="csh-wa-text">Chat on WhatsApp</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="pf-page">
+
+  <section class="pf-top">
+    <div class="csh-wrap">
+      <div class="pf-crumbs"><a href="index.html">Home</a> / Properties for Sale</div>
+      <h1>Properties for Sale</h1>
+      <p>Verified homes for sale in Nairobi and nearby areas. Filter by location, price and bedrooms, then enquire on WhatsApp.</p>
+    </div>
+  </section>
+
+  <!-- Filters -->
+  <div class="pf-filters">
+    <div class="csh-wrap">
+      <div class="pf-filter-bar">
+        <button class="pf-filter-toggle" type="button" id="filter-toggle" aria-expanded="false" aria-controls="filter-panel">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+          Filters
+        </button>
+        <span class="pf-count" id="count-mobile" aria-live="polite"></span>
+      </div>
+
+      <div class="pf-panel" id="filter-panel">
+        <form id="filters" onsubmit="return false" aria-label="Filter properties">
+          <div class="pf-fields">
+            <div class="pf-field">
+              <label for="f-area">Location</label>
+              <input id="f-area" type="search" list="areas" placeholder="e.g. Karen, Kitengela" autocomplete="off">
+              <datalist id="areas">
+                <option value="Karen"><option value="Kilimani"><option value="Kitengela"><option value="Ruaka">
+                <option value="Syokimau"><option value="Runda"><option value="Kahawa"><option value="Ruiru">
+              </datalist>
+            </div>
+            <div class="pf-field">
+              <label for="f-price">Price</label>
+              <select id="f-price">
+                <option value="">Any price</option>
+                <option value="0-5000000">Under KES 5M</option>
+                <option value="5000000-10000000">KES 5M – 10M</option>
+                <option value="10000000-20000000">KES 10M – 20M</option>
+                <option value="20000000-">Above KES 20M</option>
+              </select>
+            </div>
+            <div class="pf-field">
+              <label for="f-beds">Bedrooms</label>
+              <select id="f-beds">
+                <option value="">Any</option>
+                <option value="1">1+</option><option value="2">2+</option>
+                <option value="3">3+</option><option value="4">4+</option>
+              </select>
+            </div>
+            <div class="pf-field">
+              <label for="f-type">Property type</label>
+              <select id="f-type">
+                <option value="">All types</option>
+                <option value="apartment">Apartment</option>
+                <option value="house">House / Maisonette</option>
+              </select>
+            </div>
+            <div class="pf-field">
+              <label for="f-sort">Sort by</label>
+              <select id="f-sort">
+                <option value="featured">Featured</option>
+                <option value="low">Price: low to high</option>
+                <option value="high">Price: high to low</option>
+              </select>
+            </div>
+          </div>
+          <div class="pf-desktop-meta"><span class="pf-count" id="count-desktop" aria-live="polite"></span><button type="button" class="pf-reset" id="reset-d">Clear filters</button></div>
+          <button type="button" class="pf-reset pf-reset-m" id="reset-m">Clear filters</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Listings -->
+  <section class="pf-list">
+    <div class="csh-wrap">
+      <div class="pf-grid" id="grid"></div>
+      <div class="pf-empty" id="empty">
+        <h2>No properties match your filters</h2>
+        <p>Try a wider price range or a different area, or tell us what you need and we'll look for you.</p>
+        <a class="csh-btn csh-btn-primary" target="_blank" rel="noopener" href="https://api.whatsapp.com/send?phone=254700123456&text=Hi%2C%20I%27m%20looking%20for%20a%20property%20to%20buy.">Ask us on WhatsApp</a>
+      </div>
+      <p class="pf-note">Prices are in Kenya shillings. Details and availability are confirmed when you enquire.</p>
+    </div>
+  </section>
+</main>
+
+<!-- Enquiry dialog -->
+<dialog class="pf-dialog" id="enquiry" aria-labelledby="enq-title">
+  <button class="x" type="button" id="enq-close" aria-label="Close">✕</button>
+  <h3 id="enq-title">Enquire about this property</h3>
+  <p class="ref" id="enq-ref"></p>
+  <form id="enq-form">
+    <div class="pf-field"><label for="e-name">Full name *</label><input id="e-name" required autocomplete="name" placeholder="Your name"></div>
+    <div class="pf-field"><label for="e-phone">Phone number *</label><input id="e-phone" type="tel" inputmode="tel" required autocomplete="tel" placeholder="07XX XXX XXX"></div>
+    <button class="csh-btn csh-btn-primary" type="submit">Send enquiry on WhatsApp</button>
+  </form>
+</dialog>
+
+<!-- ================= FOOTER ================= -->
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-col">
+      <div class="footer-logo">
+        <svg class="mark" viewBox="0 0 24 24" fill="none"><path d="M3 11L12 3L21 11" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M5 10V20H19V10" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
+        <span><span class="l1">Cherry Smart Homes</span></span>
+      </div>
+      <p>Smart property management and modern living in Kenya. Verified rentals, transparent pricing, and a dashboard built for landlords and tenants alike.</p>
+      <div class="socials">
+        <a href="#" aria-label="Facebook">f</a><a href="#" aria-label="Twitter">𝕏</a><a href="#" aria-label="Instagram">◎</a><a href="#" aria-label="LinkedIn">in</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Site</h5>
+      <ul>
+        <li><a href="index.html">Find a Home</a></li>
+        <li><a href="properties.html">Properties for Sale</a></li>
+        <li><a href="for-landlords.html">For Landlords</a></li>
+        <li><a href="about%20us.html">About Us</a></li>
+        <li><a href="tenant-portal.html">Tenant Portal</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li>0700 123 456</li>
+        <li>hello@cherrysmarthomes.co.ke</li>
+        <li>Mon – Sat, 8:00 AM – 6:00 PM</li>
+      </ul>
+      <h5 style="margin-top:26px;">Legal</h5>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Use</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Visit Our Office</h5>
+      <p style="margin-bottom:8px;">Kindaruma Road, Kilimani, Nairobi, Kenya</p>
+      <a href="about%20us.html#contact">Get directions →</a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© 2026 Cherry Smart Homes Ltd. All Rights Reserved.</span>
+    <div class="links"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a><a href="#">Sitemap</a></div>
+  </div>
+</footer>
+
+<a class="whatsapp-float" href="https://api.whatsapp.com/send?phone=254700123456&text=Hi,%20I'm%20interested%20in%20a%20property%20for%20sale." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.1 8.1 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+</a>
+
+<script>
+(function(){
+  var PHONE='254700123456'; // replace with your real WhatsApp number
+
+  /* ---------- SAMPLE LISTINGS: edit/replace with your real properties ---------- */
+  var PROPERTIES=[
+    {id:'S-1001',title:'4 Bedroom House',type:'house',area:'Karen',price:8300000,beds:4,baths:3,size:240,badge:'Featured',img:'https://images.unsplash.com/photo-1613977257363-707ba9348227?q=75&w=700&auto=format&fit=crop'},
+    {id:'S-1002',title:'3 Bedroom Maisonette',type:'house',area:'Kitengela',price:6500000,beds:3,baths:3,size:160,badge:'New',img:'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=75&w=700&auto=format&fit=crop'},
+    {id:'S-1003',title:'2 Bedroom Apartment',type:'apartment',area:'Kilimani',price:9800000,beds:2,baths:2,size:95,badge:'Featured',img:'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=75&w=700&auto=format&fit=crop'},
+    {id:'S-1004',title:'1 Bedroom Apartment',type:'apartment',area:'Ruaka',price:4200000,beds:1,baths:1,size:55,badge:'',img:'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=75&w=700&auto=format&fit=crop'},
+    {id:'S-1005',title:'3 Bedroom Townhouse',type:'house',area:'Syokimau',price:7900000,beds:3,baths:3,size:170,badge:'New',img:'https://images.unsplash.com/photo-1613977257363-707ba9348227?q=75&w=700&auto=format&fit=crop'},
+    {id:'S-1006',title:'5 Bedroom Villa',type:'house',area:'Runda',price:45000000,beds:5,baths:5,size:420,badge:'Featured',img:'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=75&w=700&auto=format&fit=crop'}
+  ];
+
+  /* ---------- Helpers ---------- */
+  var $=function(id){return document.getElementById(id)};
+  function money(n){return n>=1e6?'KES '+(n/1e6).toFixed(n%1e6?1:0).replace(/\.0$/,'')+'M':'KES '+n.toLocaleString('en-KE')}
+  var icons={
+    bed:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 18v-7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v7M3 15h18M7 9V6h4v3"/></svg>',
+    bath:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 12h18v2a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5v-2zM6 12V6a2 2 0 0 1 4 0"/></svg>',
+    size:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h6V4"/></svg>',
+    pin:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>',
+    heart:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z"/></svg>'
+  };
+
+  var saved=[];
+  try{saved=JSON.parse(localStorage.getItem('csh-saved-sale')||'[]')}catch(e){}
+  function persist(){try{localStorage.setItem('csh-saved-sale',JSON.stringify(saved))}catch(e){}}
+
+  /* ---------- Filtering ---------- */
+  var f={area:$('f-area'),price:$('f-price'),beds:$('f-beds'),type:$('f-type'),sort:$('f-sort')};
+  function apply(){
+    var area=f.area.value.trim().toLowerCase(),
+        range=f.price.value?f.price.value.split('-'):null,
+        beds=+f.beds.value||0, type=f.type.value;
+    var list=PROPERTIES.filter(function(p){
+      if(area&&p.area.toLowerCase().indexOf(area)===-1)return false;
+      if(range){var lo=+range[0]||0,hi=range[1]?+range[1]:Infinity;if(p.price<lo||p.price>=hi)return false}
+      if(beds&&p.beds<beds)return false;
+      if(type&&p.type!==type)return false;
+      return true;
+    });
+    if(f.sort.value==='low')list.sort(function(a,b){return a.price-b.price});
+    if(f.sort.value==='high')list.sort(function(a,b){return b.price-a.price});
+    render(list);
+  }
+
+  function render(list){
+    var txt=list.length+(list.length===1?' property':' properties');
+    $('count-mobile').textContent=txt;$('count-desktop').textContent=txt;
+    $('empty').classList.toggle('show',!list.length);
+    $('grid').innerHTML=list.map(function(p,i){
+      var isSaved=saved.indexOf(p.id)>-1;
+      return '<article class="pf-card">'+
+        '<div class="pf-img"><img src="'+p.img+'" alt="'+p.title+' in '+p.area+'" loading="'+(i<2?'eager':'lazy')+'" width="700" height="525">'+
+          (p.badge?'<span class="pf-badge'+(p.badge==='New'?' new':'')+'">'+p.badge+'</span>':'')+
+          '<button class="pf-save" type="button" data-save="'+p.id+'" aria-pressed="'+isSaved+'" aria-label="Save '+p.title+'">'+icons.heart+'</button></div>'+
+        '<div class="pf-body">'+
+          '<div class="pf-price">'+money(p.price)+'</div>'+
+          '<h2 class="pf-title">'+p.title+'</h2>'+
+          '<div class="pf-loc">'+icons.pin+p.area+', Nairobi area</div>'+
+          '<div class="pf-specs"><span>'+icons.bed+p.beds+' Bed'+(p.beds>1?'s':'')+'</span><span>'+icons.bath+p.baths+' Bath'+(p.baths>1?'s':'')+'</span><span>'+icons.size+p.size+' m²</span></div>'+
+          '<div class="pf-btns"><a class="csh-btn csh-btn-primary" href="property-detail.html?id='+p.id+'">View details</a>'+
+          '<button class="csh-btn csh-btn-outline" type="button" data-enquire="'+p.id+'">Enquire</button></div>'+
+        '</div></article>';
+    }).join('');
+  }
+
+  Object.keys(f).forEach(function(k){f[k].addEventListener('input',apply);f[k].addEventListener('change',apply)});
+  function reset(){f.area.value='';f.price.value='';f.beds.value='';f.type.value='';f.sort.value='featured';apply()}
+  $('reset-d').addEventListener('click',reset);$('reset-m').addEventListener('click',reset);
+
+  /* Mobile filter panel */
+  var ft=$('filter-toggle'),fp=$('filter-panel');
+  ft.addEventListener('click',function(){var o=fp.classList.toggle('open');ft.setAttribute('aria-expanded',o)});
+
+  /* Pre-fill from the homepage search (?area=...&beds=...) */
+  var q=new URLSearchParams(location.search);
+  if(q.get('area'))f.area.value=q.get('area');
+  var b=q.get('beds');if(b&&/^[1-4]$/.test(b))f.beds.value=b;
+
+  /* Save + enquire (event delegation) */
+  var dlg=$('enquiry'),current=null;
+  $('grid').addEventListener('click',function(e){
+    var s=e.target.closest('[data-save]');
+    if(s){var id=s.getAttribute('data-save'),i=saved.indexOf(id);
+      if(i>-1)saved.splice(i,1);else saved.push(id);
+      s.setAttribute('aria-pressed',i===-1);persist();return}
+    var en=e.target.closest('[data-enquire]');
+    if(en){current=PROPERTIES.filter(function(p){return p.id===en.getAttribute('data-enquire')})[0];
+      $('enq-ref').textContent=current.title+' · '+current.area+' · '+money(current.price)+' (Ref '+current.id+')';
+      if(dlg.showModal)dlg.showModal();else dlg.setAttribute('open','')}
+  });
+  $('enq-close').addEventListener('click',function(){dlg.close()});
+  dlg.addEventListener('click',function(e){if(e.target===dlg)dlg.close()});
+  $('enq-form').addEventListener('submit',function(e){
+    e.preventDefault();
+    var msg='Hi Cherry Smart Homes, I am interested in this property for sale:\n'+current.title+' in '+current.area+'\nPrice: '+money(current.price)+'\nRef: '+current.id+
+            '\n\nName: '+$('e-name').value.trim()+'\nPhone: '+$('e-phone').value.trim();
+    window.open('https://api.whatsapp.com/send?phone='+PHONE+'&text='+encodeURIComponent(msg),'_blank','noopener');
+    dlg.close();
+  });
+
+  /* Mobile nav */
+  var toggle=document.querySelector('.csh-header .nav-toggle'),nav=$('site-nav');
+  function setMenu(o){nav.classList.toggle('open',o);document.body.classList.toggle('csh-menu-open',o);toggle.setAttribute('aria-expanded',o);toggle.setAttribute('aria-label',o?'Close menu':'Open menu')}
+  toggle.addEventListener('click',function(){setMenu(!nav.classList.contains('open'))});
+  nav.addEventListener('click',function(e){if(e.target.closest('a'))setMenu(false)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')setMenu(false)});
+  window.matchMedia('(min-width:992px)').addEventListener('change',function(e){if(e.matches)setMenu(false)});
+
+  apply();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Tenant Portal — Cherry Smart Homes</title>
+<meta name="description" content="Pay rent with M-Pesa, see your payment history, report repairs and view your lease. Tenant portal for Cherry Smart Homes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+
+<style>
+/* ===== Header (same as other pages) ===== */
+.csh-header,.tp-page{
+  --csh-green:#1f9d55;--csh-green-dark:#177a42;--csh-gold:#c8962b;
+  --csh-ink:#121a24;--csh-muted:#4b5563;--csh-line:#e5e7eb;
+  --csh-h:64px;--csh-radius:10px;
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--csh-ink)
+}
+.csh-header *,.tp-page *,.csh-header *::before,.tp-page *::before{box-sizing:border-box}
+.csh-header a,.tp-page a{text-decoration:none;color:inherit}
+.csh-header :focus-visible,.tp-page :focus-visible{outline:3px solid var(--csh-gold);outline-offset:2px;border-radius:6px}
+.csh-wrap{width:100%;max-width:1200px;margin:0 auto;padding:0 20px}
+.csh-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:var(--csh-radius);font:600 16px/1 Inter,sans-serif;border:1.5px solid transparent;cursor:pointer;text-align:center;transition:background .2s,color .2s,border-color .2s}
+.csh-btn[disabled]{opacity:.6;cursor:not-allowed}
+.csh-btn-primary{background:var(--csh-green);color:#fff!important}
+.csh-btn-primary:hover{background:var(--csh-green-dark)}
+.csh-btn-outline{background:#fff;color:var(--csh-ink);border-color:var(--csh-ink)}
+.csh-btn-outline:hover{background:var(--csh-ink);color:#fff}
+.csh-header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid var(--csh-line);padding-top:env(safe-area-inset-top,0px)}
+.csh-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;height:var(--csh-h)}
+.csh-logo img{height:46px;width:auto}
+.csh-actions{display:flex;align-items:center;gap:8px}
+.csh-wa{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;min-width:44px;padding:0 12px;border-radius:var(--csh-radius);background:var(--csh-green);color:#fff!important;font-weight:600;font-size:14px}
+.csh-wa-text{display:none}
+.csh-header .nav-toggle{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;border:1px solid var(--csh-line);border-radius:var(--csh-radius);background:#fff;color:var(--csh-ink);cursor:pointer}
+.csh-nav{position:fixed;inset:calc(var(--csh-h) + env(safe-area-inset-top,0px)) 0 0 0;background:#fff;display:flex;flex-direction:column;padding:12px 20px calc(24px + env(safe-area-inset-bottom,0px));overflow-y:auto;transform:translateX(100%);visibility:hidden;transition:transform .25s ease,visibility .25s}
+.csh-nav.open{transform:none;visibility:visible}
+.csh-nav a{display:flex;align-items:center;min-height:56px;font-size:18px;font-weight:500;border-bottom:1px solid var(--csh-line)}
+.csh-nav a.active{color:var(--csh-green);font-weight:700}
+.csh-nav .csh-portal{margin-top:20px;justify-content:center;border:1.5px solid var(--csh-ink);border-radius:var(--csh-radius);font-size:16px;font-weight:600}
+.csh-nav .csh-portal.active{border-color:var(--csh-green);background:#e8f6ee}
+body.csh-menu-open{overflow:hidden}
+
+/* ===== Portal ===== */
+.tp-page{background:#f6f8f7;min-height:60vh;padding:20px 0 56px}
+.tp-page h1{margin:0 0 8px;font-size:clamp(1.7rem,6vw,2.4rem);line-height:1.12;font-weight:800;letter-spacing:-.02em}
+.tp-page h2{margin:0 0 10px;font-size:1.15rem;font-weight:700}
+.tp-page h3{margin:0 0 4px;font-size:1rem;font-weight:700}
+.tp-page p{margin:0 0 12px;color:var(--csh-muted);line-height:1.6}
+.tp-demo{margin:0 0 16px;padding:10px 14px;border-radius:var(--csh-radius);background:#fef3c7;color:#92400e;font-size:14px;font-weight:600}
+.tp-card{background:#fff;border:1px solid var(--csh-line);border-radius:14px;padding:18px}
+.tp-eyebrow{display:inline-block;margin-bottom:8px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--csh-green-dark)}
+
+/* Sign in */
+.tp-login{display:grid;gap:20px;max-width:980px;margin:0 auto;padding-top:8px}
+.tp-list{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:10px}
+.tp-list li{display:flex;gap:10px;align-items:flex-start;font-weight:500;font-size:15px}
+.tp-list svg{flex:none;margin-top:2px;color:var(--csh-green)}
+.tp-form{display:grid;gap:14px}
+.tp-field label{display:block;margin-bottom:6px;font-size:13px;font-weight:600;color:var(--csh-muted)}
+.tp-field input,.tp-field select,.tp-field textarea{width:100%;margin:0;padding:0 14px;border:1.5px solid var(--csh-line);border-radius:var(--csh-radius);background:#fff;color:var(--csh-ink);font:500 16px Inter,sans-serif;appearance:none;-webkit-appearance:none}
+.tp-field input,.tp-field select{height:50px}
+.tp-field textarea{padding:12px 14px;min-height:100px;resize:vertical}
+.tp-field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%234b5563' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:38px}
+.tp-field input:focus,.tp-field select:focus,.tp-field textarea:focus{border-color:var(--csh-green);outline:none;box-shadow:0 0 0 3px rgba(31,157,85,.18)}
+.tp-pw{position:relative}
+.tp-pw input{padding-right:64px}
+.tp-pw button{position:absolute;right:4px;top:3px;height:44px;min-width:56px;border:0;background:none;color:var(--csh-green-dark);font:600 14px Inter,sans-serif;cursor:pointer}
+.tp-msg{min-height:20px;margin:0!important;font-size:14px}
+.tp-msg.err{color:#b91c1c}.tp-msg.ok{color:var(--csh-green-dark);font-weight:600}
+.tp-link{color:var(--csh-green-dark);font-weight:600;text-decoration:underline;font-size:14px}
+
+/* App top */
+.tp-top{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:16px}
+.tp-top p{margin:0}
+.tp-signout{min-height:44px;padding:0 16px;border:1.5px solid var(--csh-line);border-radius:var(--csh-radius);background:#fff;font:600 14px Inter,sans-serif;cursor:pointer}
+
+/* Tabs */
+.tp-tabs{display:flex;gap:6px;overflow-x:auto;margin:0 -20px 16px;padding:0 20px 4px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.tp-tabs::-webkit-scrollbar{display:none}
+.tp-tab{flex:none;min-height:44px;padding:0 16px;border:1.5px solid var(--csh-line);border-radius:999px;background:#fff;font:600 14.5px Inter,sans-serif;color:var(--csh-ink);cursor:pointer}
+.tp-tab[aria-selected="true"]{background:var(--csh-green);border-color:var(--csh-green);color:#fff}
+.tp-page [hidden]{display:none!important}
+.tp-grid{display:grid;gap:14px}
+
+/* Overview */
+.tp-due{background:linear-gradient(135deg,#177a42,#1f9d55);color:#fff;border:0}
+.tp-due p{color:#e8f6ee;margin:0}
+.tp-due .amt{font-size:clamp(1.8rem,8vw,2.4rem);font-weight:800;margin:4px 0}
+.tp-due .csh-btn{background:#fff;color:var(--csh-green-dark)!important;margin-top:14px;width:100%}
+.tp-kv{display:grid;gap:10px;margin:0}
+.tp-kv div{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--csh-line);font-size:15px}
+.tp-kv div:last-child{border-bottom:0}
+.tp-kv dt{color:var(--csh-muted)}
+.tp-kv dd{margin:0;font-weight:600;text-align:right}
+.tp-quick{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tp-quick .csh-btn{min-height:52px;font-size:15px}
+
+/* Pay */
+.tp-copy{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 14px;border:1.5px dashed var(--csh-line);border-radius:var(--csh-radius);margin-bottom:10px}
+.tp-copy small{display:block;color:var(--csh-muted);font-size:12px}
+.tp-copy b{font-size:1.1rem;letter-spacing:.02em}
+.tp-copy button{min-height:40px;padding:0 14px;border:1.5px solid var(--csh-green);border-radius:8px;background:#fff;color:var(--csh-green-dark);font:600 14px Inter,sans-serif;cursor:pointer}
+
+/* Lists */
+.tp-item{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--csh-line)}
+.tp-item:last-child{border-bottom:0}
+.tp-item b{display:block;font-size:15px}
+.tp-item small{color:var(--csh-muted);font-size:13px}
+.tp-item .r{text-align:right;flex:none}
+.tp-pill{display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px}
+.tp-pill.ok{background:#e8f6ee;color:var(--csh-green-dark)}
+.tp-pill.wait{background:#fef3c7;color:#92400e}
+.tp-pill.bad{background:#fee2e2;color:#b91c1c}
+.tp-empty{padding:20px 0;text-align:center;color:var(--csh-muted)}
+
+@media (min-width:640px){
+  .csh-wa-text{display:inline}
+  .tp-tabs{margin:0 0 16px;padding:0}
+}
+@media (min-width:992px){
+  .csh-header,.tp-page{--csh-h:76px}
+  .csh-logo img{height:54px}
+  .csh-header .nav-toggle{display:none}
+  .csh-nav{position:static;flex-direction:row;align-items:center;gap:6px;padding:0;overflow:visible;transform:none;visibility:visible;background:none}
+  .csh-nav a{min-height:44px;padding:0 12px;font-size:16px;border-bottom:0;border-radius:8px}
+  .csh-nav a:hover{background:#f3f4f6}
+  .csh-nav .csh-portal{margin:0 0 0 6px;padding:0 16px;font-size:15px}
+  .tp-page{padding:40px 0 72px}
+  .tp-login{grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+  .tp-grid.two{grid-template-columns:1.2fr 1fr}
+  .tp-due .csh-btn{width:auto}
+}
+@media (prefers-reduced-motion:reduce){.csh-nav{transition:none}}
+</style>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="csh-header">
+  <div class="csh-wrap csh-bar">
+    <a href="index.html" class="csh-logo" aria-label="Cherry Smart Homes home">
+      <img src="logo.png" width="205" height="54" alt="Cherry Smart Homes — Find your next home">
+    </a>
+    <nav id="site-nav" class="csh-nav" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="properties.html">Properties for Sale</a>
+      <a href="rentals.html">Rentals</a>
+      <a href="bnb.html">Airbnb</a>
+      <a href="for-landlords.html">For Landlords</a>
+      <a href="about%20us.html">About Us</a>
+      <a href="tenant-portal.html" class="csh-portal active" aria-current="page">Tenant Portal</a>
+    </nav>
+    <div class="csh-actions">
+      <a class="csh-wa" target="_blank" rel="noopener"
+         href="https://api.whatsapp.com/send?phone=254700123456&text=Hi%2C%20I%27m%20a%20tenant%20and%20I%20need%20help."
+         aria-label="Chat with us on WhatsApp">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.1 8.1 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+        <span class="csh-wa-text">Chat on WhatsApp</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="tp-page">
+  <div class="csh-wrap">
+    <div class="tp-demo" id="demo-banner" hidden>Demo mode: sample data only. Sign in with any phone number and password to preview the portal.</div>
+
+    <!-- ========== SIGN IN ========== -->
+    <section id="view-login" class="tp-login" aria-labelledby="login-title">
+      <div>
+        <span class="tp-eyebrow">Tenant portal</span>
+        <h1 id="login-title">Manage your home in one place.</h1>
+        <p>Pay rent, see your receipts and tell us about repairs, all from your phone.</p>
+        <ul class="tp-list">
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg>Pay rent with M-Pesa</li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg>See your payment history and balance</li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg>Report repairs and track progress</li>
+          <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg>View your lease details</li>
+        </ul>
+      </div>
+      <div class="tp-card">
+        <h2>Sign in</h2>
+        <form class="tp-form" id="login-form" novalidate>
+          <div class="tp-field"><label for="l-id">Phone number or email</label><input id="l-id" autocomplete="username" inputmode="text" placeholder="07XX XXX XXX"></div>
+          <div class="tp-field">
+            <label for="l-pw">Password</label>
+            <div class="tp-pw"><input id="l-pw" type="password" autocomplete="current-password" placeholder="Your password"><button type="button" id="pw-toggle" aria-label="Show password">Show</button></div>
+          </div>
+          <p class="tp-msg err" id="l-msg" role="alert"></p>
+          <button class="csh-btn csh-btn-primary" type="submit" id="l-btn">Sign in</button>
+          <p style="margin:0;font-size:14px">Forgot your password or don't have an account yet? <a class="tp-link" target="_blank" rel="noopener" href="https://api.whatsapp.com/send?phone=254700123456&text=Hi%2C%20I%20need%20help%20with%20my%20tenant%20portal%20account.">Message us on WhatsApp</a></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- ========== DASHBOARD ========== -->
+    <section id="view-app" hidden aria-label="Your tenant dashboard">
+      <div class="tp-top">
+        <div>
+          <h1 id="hello">Hello</h1>
+          <p id="unit-line"></p>
+        </div>
+        <button class="tp-signout" type="button" id="signout">Sign out</button>
+      </div>
+
+      <div class="tp-tabs" role="tablist" aria-label="Portal sections" id="tabs">
+        <button class="tp-tab" role="tab" id="t-overview" aria-controls="p-overview" aria-selected="true">Overview</button>
+        <button class="tp-tab" role="tab" id="t-pay" aria-controls="p-pay" aria-selected="false" tabindex="-1">Pay rent</button>
+        <button class="tp-tab" role="tab" id="t-history" aria-controls="p-history" aria-selected="false" tabindex="-1">Payments</button>
+        <button class="tp-tab" role="tab" id="t-repairs" aria-controls="p-repairs" aria-selected="false" tabindex="-1">Repairs</button>
+        <button class="tp-tab" role="tab" id="t-lease" aria-controls="p-lease" aria-selected="false" tabindex="-1">Lease</button>
+      </div>
+
+      <!-- Overview -->
+      <div class="tp-panel" role="tabpanel" id="p-overview" aria-labelledby="t-overview">
+        <div class="tp-grid two">
+          <div class="tp-grid">
+            <div class="tp-card tp-due">
+              <p id="due-label">Rent balance</p>
+              <div class="amt" id="due-amt">KES 0</div>
+              <p id="due-sub"></p>
+              <button class="csh-btn" type="button" data-go="pay">Pay with M-Pesa</button>
+            </div>
+            <div class="tp-quick">
+              <button class="csh-btn csh-btn-outline" type="button" data-go="repairs">Report a repair</button>
+              <a class="csh-btn csh-btn-outline" id="wa-manager" target="_blank" rel="noopener" href="#">Message manager</a>
+            </div>
+          </div>
+          <div class="tp-card">
+            <h2>Your home</h2>
+            <dl class="tp-kv" id="home-kv"></dl>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pay -->
+      <div class="tp-panel" role="tabpanel" id="p-pay" aria-labelledby="t-pay" hidden>
+        <div class="tp-grid two">
+          <div class="tp-card">
+            <h2>Get an M-Pesa prompt</h2>
+            <p>Enter the amount and your M-Pesa number. You'll get a prompt on your phone to enter your PIN.</p>
+            <form class="tp-form" id="pay-form" novalidate>
+              <div class="tp-field"><label for="p-amt">Amount (KES)</label><input id="p-amt" type="number" min="1" inputmode="numeric"></div>
+              <div class="tp-field"><label for="p-phone">M-Pesa phone number</label><input id="p-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="07XX XXX XXX"></div>
+              <p class="tp-msg" id="p-msg" role="status"></p>
+              <button class="csh-btn csh-btn-primary" type="submit" id="p-btn">Send M-Pesa prompt</button>
+            </form>
+          </div>
+          <div class="tp-card">
+            <h2>Or pay manually</h2>
+            <p>Go to M-Pesa, then Lipa na M-Pesa, then Paybill.</p>
+            <!-- EDIT: put your real Paybill number. Account = the tenant's unit number -->
+            <div class="tp-copy"><div><small>Paybill number</small><b id="paybill">000000</b></div><button type="button" data-copy="paybill">Copy</button></div>
+            <div class="tp-copy"><div><small>Account number</small><b id="acct">—</b></div><button type="button" data-copy="acct">Copy</button></div>
+            <p style="margin:0;font-size:14px">Your payment shows up in <b>Payments</b> after it's confirmed.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- History -->
+      <div class="tp-panel" role="tabpanel" id="p-history" aria-labelledby="t-history" hidden>
+        <div class="tp-card"><h2>Payment history</h2><div id="pay-list"></div></div>
+      </div>
+
+      <!-- Repairs -->
+      <div class="tp-panel" role="tabpanel" id="p-repairs" aria-labelledby="t-repairs" hidden>
+        <div class="tp-grid two">
+          <div class="tp-card">
+            <h2>Report a problem</h2>
+            <form class="tp-form" id="req-form" novalidate>
+              <div class="tp-field">
+                <label for="r-cat">What is it about?</label>
+                <select id="r-cat"><option>Plumbing / water</option><option>Electrical</option><option>Doors, windows, locks</option><option>Security</option><option>Other</option></select>
+              </div>
+              <div class="tp-field">
+                <label for="r-urg">How urgent?</label>
+                <select id="r-urg"><option>Normal</option><option>Urgent</option></select>
+              </div>
+              <div class="tp-field"><label for="r-desc">Describe the problem *</label><textarea id="r-desc" placeholder="e.g. The kitchen tap is leaking"></textarea></div>
+              <p class="tp-msg" id="r-msg" role="status"></p>
+              <button class="csh-btn csh-btn-primary" type="submit" id="r-btn">Send request</button>
+            </form>
+          </div>
+          <div class="tp-card"><h2>Your requests</h2><div id="req-list"></div></div>
+        </div>
+      </div>
+
+      <!-- Lease -->
+      <div class="tp-panel" role="tabpanel" id="p-lease" aria-labelledby="t-lease" hidden>
+        <div class="tp-grid two">
+          <div class="tp-card"><h2>Lease details</h2><dl class="tp-kv" id="lease-kv"></dl></div>
+          <div class="tp-card">
+            <h2>Moving out?</h2>
+            <p>Check your lease for the notice period, then let us know so we can plan your exit inspection and deposit refund.</p>
+            <a class="csh-btn csh-btn-outline" id="wa-notice" target="_blank" rel="noopener" href="#">Give notice on WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-col">
+      <div class="footer-logo">
+        <svg class="mark" viewBox="0 0 24 24" fill="none"><path d="M3 11L12 3L21 11" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M5 10V20H19V10" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
+        <span><span class="l1">Cherry Smart Homes</span></span>
+      </div>
+      <p>Smart property management and modern living in Kenya. Verified rentals, transparent pricing, and a dashboard built for landlords and tenants alike.</p>
+      <div class="socials">
+        <a href="#" aria-label="Facebook">f</a><a href="#" aria-label="Twitter">𝕏</a><a href="#" aria-label="Instagram">◎</a><a href="#" aria-label="LinkedIn">in</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Site</h5>
+      <ul>
+        <li><a href="index.html">Find a Home</a></li>
+        <li><a href="rentals.html">Rentals</a></li>
+        <li><a href="properties.html">Properties for Sale</a></li>
+        <li><a href="bnb.html">Airbnb</a></li>
+        <li><a href="for-landlords.html">For Landlords</a></li>
+        <li><a href="about%20us.html">About Us</a></li>
+        <li><a href="tenant-portal.html">Tenant Portal</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li>0700 123 456</li>
+        <li>hello@cherrysmarthomes.co.ke</li>
+        <li>Mon – Sat, 8:00 AM – 6:00 PM</li>
+      </ul>
+      <h5 style="margin-top:26px;">Legal</h5>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Use</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Visit Our Office</h5>
+      <p style="margin-bottom:8px;">Kindaruma Road, Kilimani, Nairobi, Kenya</p>
+      <a href="about%20us.html#contact">Get directions →</a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© 2026 Cherry Smart Homes Ltd. All Rights Reserved.</span>
+    <div class="links"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a><a href="#">Sitemap</a></div>
+  </div>
+</footer>
+
+<a class="whatsapp-float" href="https://api.whatsapp.com/send?phone=254700123456&text=Hi,%20I'm%20a%20tenant%20and%20I%20need%20help." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.1 8.1 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+</a>
+
+<script>
+(function(){
+  /* =====================================================================
+     SETTINGS
+     DEMO: true  -> works with sample data only (no real login). Great for
+                    previewing the design. NEVER leave it true on a live site.
+     DEMO: false -> talks to your backend. Expected endpoints (JSON, cookie session):
+       POST {API}/tenant/login     body {identifier,password}  -> 200 ok / 401
+       POST {API}/tenant/logout
+       GET  {API}/tenant/me        -> {name,unit,property,rent,dueDay,balance,nextDue,deposit,leaseStart,leaseEnd,managerPhone,paybill}
+       GET  {API}/tenant/payments  -> [{date,amount,code,status}]    status: Confirmed | Pending | Failed
+       GET  {API}/tenant/requests  -> [{date,category,urgency,description,status}]  status: Open | In progress | Done
+       POST {API}/tenant/requests  body {category,urgency,description}
+       POST {API}/tenant/pay       body {phone,amount}  -> starts an M-Pesa STK push
+     ===================================================================== */
+  var CONFIG={DEMO:true,API:'/api',PHONE:'254700123456',PAYBILL:'000000'};
+
+  var $=function(id){return document.getElementById(id)};
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+  function kes(n){return 'KES '+Number(n||0).toLocaleString('en-KE')}
+  function fmt(v){var d=new Date(v);return isNaN(d)?'—':d.toLocaleDateString('en-KE',{day:'numeric',month:'short',year:'numeric'})}
+  function wa(text){return 'https://api.whatsapp.com/send?phone='+CONFIG.PHONE+'&text='+encodeURIComponent(text)}
+
+  var state={me:null,payments:[],requests:[]};
+
+  /* ---------- Demo data (obviously fake) ---------- */
+  function demoData(){
+    var now=new Date(),due=new Date(now.getFullYear(),now.getMonth()+(now.getDate()>5?1:0),5);
+    function monthsAgo(n){var d=new Date(now.getFullYear(),now.getMonth()-n,5);return d.toISOString()}
+    return {
+      me:{name:'Demo Tenant',unit:'Unit B3',property:'Sample Apartments, Kawangware',rent:12000,dueDay:5,balance:12000,nextDue:due.toISOString(),deposit:12000,
+          leaseStart:new Date(now.getFullYear(),0,1).toISOString(),leaseEnd:new Date(now.getFullYear()+1,0,1).toISOString(),managerPhone:CONFIG.PHONE,paybill:CONFIG.PAYBILL},
+      payments:[{date:monthsAgo(1),amount:12000,code:'SAMPLE001',status:'Confirmed'},{date:monthsAgo(2),amount:12000,code:'SAMPLE002',status:'Confirmed'},{date:monthsAgo(3),amount:12000,code:'SAMPLE003',status:'Confirmed'}],
+      requests:[{date:monthsAgo(0),category:'Plumbing / water',urgency:'Normal',description:'Kitchen tap is leaking',status:'In progress'}]
+    };
+  }
+
+  /* ---------- API helper ---------- */
+  function api(path,opts){
+    opts=opts||{};
+    return fetch(CONFIG.API+path,{method:opts.method||'GET',credentials:'include',headers:{'Content-Type':'application/json'},body:opts.body?JSON.stringify(opts.body):undefined})
+      .then(function(r){if(!r.ok){var e=new Error('HTTP '+r.status);e.status=r.status;throw e}return r.status===204?null:r.json()});
+  }
+
+  /* ---------- Views ---------- */
+  function show(app){$('view-login').hidden=app;$('view-app').hidden=!app;window.scrollTo(0,0)}
+
+  function loadAll(){
+    if(CONFIG.DEMO){var d=demoData();state.me=d.me;state.payments=d.payments;state.requests=d.requests;return Promise.resolve()}
+    return Promise.all([api('/tenant/me'),api('/tenant/payments'),api('/tenant/requests')]).then(function(r){state.me=r[0];state.payments=r[1]||[];state.requests=r[2]||[]});
+  }
+
+  function renderAll(){
+    var m=state.me;
+    $('hello').textContent='Hello, '+(m.name||'tenant').split(' ')[0];
+    $('unit-line').textContent=[m.unit,m.property].filter(Boolean).join(' · ');
+    var bal=Number(m.balance)||0;
+    $('due-label').textContent=bal>0?'Rent due':'Rent status';
+    $('due-amt').textContent=bal>0?kes(bal):'Paid up';
+    $('due-sub').textContent=bal>0?'Due '+fmt(m.nextDue):'Thank you! Your next rent is due '+fmt(m.nextDue)+'.';
+    kv($('home-kv'),[['Unit',m.unit],['Property',m.property],['Monthly rent',kes(m.rent)],['Rent due on','The '+m.dueDay+ordinal(m.dueDay)+' of each month']]);
+    kv($('lease-kv'),[['Unit',m.unit],['Property',m.property],['Monthly rent',kes(m.rent)],['Deposit paid',kes(m.deposit)],['Lease start',fmt(m.leaseStart)],['Lease end',fmt(m.leaseEnd)]]);
+    $('p-amt').value=bal>0?bal:m.rent;
+    $('paybill').textContent=m.paybill||CONFIG.PAYBILL;
+    $('acct').textContent=m.unit||'—';
+    $('wa-manager').href=wa('Hi, this is '+m.name+' ('+m.unit+', '+m.property+'). ');
+    $('wa-notice').href=wa('Hi, this is '+m.name+' ('+m.unit+', '+m.property+'). I would like to give notice to vacate.');
+    renderPayments();renderRequests();
+  }
+  function ordinal(n){var s=n%100;if(s>=11&&s<=13)return 'th';return {1:'st',2:'nd',3:'rd'}[n%10]||'th'}
+  function kv(el,rows){el.innerHTML=rows.map(function(r){return '<div><dt>'+esc(r[0])+'</dt><dd>'+esc(r[1])+'</dd></div>'}).join('')}
+  function pill(s){var c=/confirm|done/i.test(s)?'ok':/fail/i.test(s)?'bad':'wait';return '<span class="tp-pill '+c+'">'+esc(s)+'</span>'}
+  function renderPayments(){
+    $('pay-list').innerHTML=state.payments.length?state.payments.map(function(p){
+      return '<div class="tp-item"><div><b>'+kes(p.amount)+'</b><small>'+fmt(p.date)+' · M-Pesa '+esc(p.code)+'</small></div><div class="r">'+pill(p.status)+'</div></div>';
+    }).join(''):'<div class="tp-empty">No payments yet.</div>';
+  }
+  function renderRequests(){
+    $('req-list').innerHTML=state.requests.length?state.requests.map(function(r){
+      return '<div class="tp-item"><div><b>'+esc(r.category)+(/urgent/i.test(r.urgency)?' · Urgent':'')+'</b><small>'+esc(r.description)+' · '+fmt(r.date)+'</small></div><div class="r">'+pill(r.status)+'</div></div>';
+    }).join(''):'<div class="tp-empty">No requests yet.</div>';
+  }
+
+  /* ---------- Tabs ---------- */
+  var tabs=[].slice.call(document.querySelectorAll('.tp-tab'));
+  function go(name){
+    tabs.forEach(function(t){var on=t.id==='t-'+name;t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1;$(t.getAttribute('aria-controls')).hidden=!on;if(on)t.scrollIntoView({block:'nearest',inline:'center'})});
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){go(t.id.slice(2))});
+    t.addEventListener('keydown',function(e){
+      var n=e.key==='ArrowRight'?i+1:e.key==='ArrowLeft'?i-1:null;if(n===null)return;
+      n=(n+tabs.length)%tabs.length;tabs[n].focus();go(tabs[n].id.slice(2));
+    });
+  });
+  document.addEventListener('click',function(e){var g=e.target.closest('[data-go]');if(g)go(g.getAttribute('data-go'))});
+
+  /* ---------- Sign in / out ---------- */
+  var pw=$('l-pw');
+  $('pw-toggle').addEventListener('click',function(){var s=pw.type==='password';pw.type=s?'text':'password';this.textContent=s?'Hide':'Show';this.setAttribute('aria-label',s?'Hide password':'Show password')});
+
+  $('login-form').addEventListener('submit',function(e){
+    e.preventDefault();
+    var id=$('l-id').value.trim(),p=pw.value,msg=$('l-msg'),btn=$('l-btn');
+    if(!id||!p){msg.textContent='Please enter your phone number or email, and your password.';return}
+    msg.textContent='';btn.disabled=true;btn.textContent='Signing in…';
+    var login=CONFIG.DEMO?Promise.resolve():api('/tenant/login',{method:'POST',body:{identifier:id,password:p}});
+    login.then(loadAll).then(function(){
+      if(CONFIG.DEMO)try{sessionStorage.setItem('csh-tp-demo','1')}catch(x){}
+      pw.value='';renderAll();go('overview');show(true);
+    }).catch(function(err){
+      msg.textContent=(err&&err.status===401)?'Wrong phone/email or password. Please try again.':'We could not sign you in right now. Please try again or message us on WhatsApp.';
+    }).then(function(){btn.disabled=false;btn.textContent='Sign in'});
+  });
+
+  $('signout').addEventListener('click',function(){
+    try{sessionStorage.removeItem('csh-tp-demo')}catch(x){}
+    (CONFIG.DEMO?Promise.resolve():api('/tenant/logout',{method:'POST'}).catch(function(){})).then(function(){
+      state={me:null,payments:[],requests:[]};show(false);
+    });
+  });
+
+  /* ---------- Pay ---------- */
+  $('pay-form').addEventListener('submit',function(e){
+    e.preventDefault();
+    var amt=Number($('p-amt').value),phone=$('p-phone').value.trim(),msg=$('p-msg'),btn=$('p-btn');
+    msg.className='tp-msg';
+    if(!(amt>0)||!/^(\+?254|0)[17]\d{8}$/.test(phone.replace(/\s/g,''))){msg.className='tp-msg err';msg.textContent='Enter a valid amount and a Safaricom number like 07XX XXX XXX.';return}
+    btn.disabled=true;btn.textContent='Sending…';
+    var req=CONFIG.DEMO?Promise.resolve():api('/tenant/pay',{method:'POST',body:{phone:phone,amount:amt}});
+    req.then(function(){
+      msg.className='tp-msg ok';
+      msg.textContent=CONFIG.DEMO?'Demo only: in the live portal, a prompt for '+kes(amt)+' would be sent to '+phone+'.':'Check your phone and enter your M-Pesa PIN to pay '+kes(amt)+'.';
+    }).catch(function(){msg.className='tp-msg err';msg.textContent='We could not start the payment. Please try again or pay with the Paybill details.'})
+    .then(function(){btn.disabled=false;btn.textContent='Send M-Pesa prompt'});
+  });
+
+  document.addEventListener('click',function(e){
+    var c=e.target.closest('[data-copy]');if(!c)return;
+    var text=$(c.getAttribute('data-copy')).textContent;
+    function done(){var o=c.textContent;c.textContent='Copied';setTimeout(function(){c.textContent=o},1500)}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done,function(){})}
+    else{var t=document.createElement('textarea');t.value=text;document.body.appendChild(t);t.select();try{document.execCommand('copy');done()}catch(x){}document.body.removeChild(t)}
+  });
+
+  /* ---------- Repairs ---------- */
+  $('req-form').addEventListener('submit',function(e){
+    e.preventDefault();
+    var desc=$('r-desc').value.trim(),msg=$('r-msg'),btn=$('r-btn');
+    msg.className='tp-msg';
+    if(desc.length<5){msg.className='tp-msg err';msg.textContent='Please describe the problem in a few words.';return}
+    var body={category:$('r-cat').value,urgency:$('r-urg').value,description:desc};
+    btn.disabled=true;btn.textContent='Sending…';
+    var req=CONFIG.DEMO?Promise.resolve():api('/tenant/requests',{method:'POST',body:body});
+    req.then(function(){
+      state.requests.unshift({date:new Date().toISOString(),category:body.category,urgency:body.urgency,description:desc,status:'Open'});
+      renderRequests();$('r-desc').value='';msg.className='tp-msg ok';
+      msg.textContent=CONFIG.DEMO?'Demo only: request added to the list below.':'Request sent. We will update the status here.';
+    }).catch(function(){msg.className='tp-msg err';msg.textContent='We could not send your request. Please try again or message us on WhatsApp.'})
+    .then(function(){btn.disabled=false;btn.textContent='Send request'});
+  });
+
+  /* ---------- Start ---------- */
+  $('demo-banner').hidden=!CONFIG.DEMO;
+  function restore(){
+    if(CONFIG.DEMO){
+      var on=false;try{on=sessionStorage.getItem('csh-tp-demo')==='1'}catch(x){}
+      if(on)loadAll().then(function(){renderAll();show(true)});return;
+    }
+    api('/tenant/me').then(function(me){state.me=me;return loadAll()}).then(function(){renderAll();show(true)}).catch(function(){});
+  }
+  restore();
+
+  /* ---------- Mobile nav ---------- */
+  var toggle=document.querySelector('.csh-header .nav-toggle'),nav=$('site-nav');
+  function setMenu(o){nav.classList.toggle('open',o);document.body.classList.toggle('csh-menu-open',o);toggle.setAttribute('aria-expanded',o);toggle.setAttribute('aria-label',o?'Close menu':'Open menu')}
+  toggle.addEventListener('click',function(){setMenu(!nav.classList.contains('open'))});
+  nav.addEventListener('click',function(e){if(e.target.closest('a'))setMenu(false)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')setMenu(false)});
+  window.matchMedia('(min-width:992px)').addEventListener('change',function(e){if(e.matches)setMenu(false)});
+})();
+</script>
+</body>
+</html>

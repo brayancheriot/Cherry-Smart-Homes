@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>For Landlords — Property Management in Nairobi | Cherry Smart Homes</title>
+<meta name="description" content="List your property with Cherry Smart Homes. M-Pesa rent collection, tenant screening, maintenance and an owner dashboard, so you can earn from your property without the stress.">
+<meta property="og:title" content="For Landlords — Cherry Smart Homes">
+<meta property="og:description" content="We find tenants, collect rent via M-Pesa and manage your property for you.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+
+<style>
+/* ===== Header (same as other pages) ===== */
+.csh-header,.fl-page{
+  --csh-green:#1f9d55;--csh-green-dark:#177a42;--csh-gold:#c8962b;
+  --csh-ink:#121a24;--csh-muted:#4b5563;--csh-line:#e5e7eb;
+  --csh-h:64px;--csh-radius:10px;
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--csh-ink)
+}
+.csh-header *,.fl-page *,.csh-header *::before,.fl-page *::before{box-sizing:border-box}
+.csh-header a,.fl-page a{text-decoration:none;color:inherit}
+.csh-header :focus-visible,.fl-page :focus-visible{outline:3px solid var(--csh-gold);outline-offset:2px;border-radius:6px}
+.csh-wrap{width:100%;max-width:1200px;margin:0 auto;padding:0 20px}
+.csh-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:var(--csh-radius);font:600 16px/1 Inter,sans-serif;border:1.5px solid transparent;cursor:pointer;text-align:center;transition:background .2s,color .2s,border-color .2s}
+.csh-btn-primary{background:var(--csh-green);color:#fff!important}
+.csh-btn-primary:hover{background:var(--csh-green-dark)}
+.csh-btn-outline{background:#fff;color:var(--csh-ink);border-color:var(--csh-ink)}
+.csh-btn-outline:hover{background:var(--csh-ink);color:#fff}
+.csh-header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid var(--csh-line);padding-top:env(safe-area-inset-top,0px)}
+.csh-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;height:var(--csh-h)}
+.csh-logo img{height:46px;width:auto}
+.csh-actions{display:flex;align-items:center;gap:8px}
+.csh-wa{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;min-width:44px;padding:0 12px;border-radius:var(--csh-radius);background:var(--csh-green);color:#fff!important;font-weight:600;font-size:14px}
+.csh-wa-text{display:none}
+.csh-header .nav-toggle{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;border:1px solid var(--csh-line);border-radius:var(--csh-radius);background:#fff;color:var(--csh-ink);cursor:pointer}
+.csh-nav{position:fixed;inset:calc(var(--csh-h) + env(safe-area-inset-top,0px)) 0 0 0;background:#fff;display:flex;flex-direction:column;padding:12px 20px calc(24px + env(safe-area-inset-bottom,0px));overflow-y:auto;transform:translateX(100%);visibility:hidden;transition:transform .25s ease,visibility .25s}
+.csh-nav.open{transform:none;visibility:visible}
+.csh-nav a{display:flex;align-items:center;min-height:56px;font-size:18px;font-weight:500;border-bottom:1px solid var(--csh-line)}
+.csh-nav a.active{color:var(--csh-green);font-weight:700}
+.csh-nav .csh-portal{margin-top:20px;justify-content:center;border:1.5px solid var(--csh-ink);border-radius:var(--csh-radius);font-size:16px;font-weight:600}
+body.csh-menu-open{overflow:hidden}
+
+/* ===== Landlords page ===== */
+.fl-page section{padding:48px 0}
+.fl-page h1{margin:0 0 14px;font-size:clamp(2rem,7.2vw,3.3rem);line-height:1.08;font-weight:800;letter-spacing:-.02em}
+.fl-page h2{margin:0 0 10px;font-size:clamp(1.5rem,5vw,2.1rem);line-height:1.15;font-weight:800;letter-spacing:-.01em}
+.fl-page h3{margin:0 0 6px;font-size:1.1rem;font-weight:700}
+.fl-page p{margin:0 0 14px;color:var(--csh-muted);line-height:1.65}
+.fl-eyebrow{display:inline-block;margin-bottom:10px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--csh-green-dark)}
+.fl-alt{background:#f6f8f7}
+.fl-head{margin-bottom:24px;max-width:60ch}
+.fl-head p{margin:0}
+.fl-grid{display:grid;gap:14px}
+.fl-card{background:#fff;border:1px solid var(--csh-line);border-radius:14px;padding:20px}
+.fl-card p{margin:0;font-size:15px}
+.fl-ico{width:46px;height:46px;border-radius:12px;background:#e8f6ee;color:var(--csh-green-dark);display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+
+/* Hero */
+.fl-hero{background:#f6f8f7;padding:32px 0 40px!important}
+.fl-hero-grid{display:grid;gap:28px}
+.fl-hero .lead{font-size:1.05rem;max-width:52ch}
+.fl-btns{display:grid;gap:10px;margin:20px 0 4px}
+.fl-checks{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:8px}
+.fl-checks li{display:flex;gap:10px;align-items:flex-start;color:var(--csh-ink);font-weight:500;font-size:15px}
+.fl-checks svg{flex:none;margin-top:2px;color:var(--csh-green)}
+
+/* Dashboard sample */
+.fl-dash{background:#fff;border:1px solid var(--csh-line);border-radius:16px;padding:16px;box-shadow:0 14px 40px rgba(18,26,36,.1)}
+.fl-dash-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-size:14px;font-weight:700}
+.fl-dash-head span{font-weight:500;color:var(--csh-muted);font-size:12px}
+.fl-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.fl-tile{background:#f6f8f7;border-radius:10px;padding:10px}
+.fl-tile b{display:block;font-size:1.05rem}
+.fl-tile small{color:var(--csh-muted);font-size:11.5px}
+.fl-bar{margin:14px 0 6px;height:10px;border-radius:99px;background:#e5e7eb;overflow:hidden}
+.fl-bar i{display:block;height:100%;width:86%;background:var(--csh-green)}
+.fl-bar-lbl{display:flex;justify-content:space-between;font-size:12px;color:var(--csh-muted)}
+.fl-rows{margin-top:14px;display:grid;gap:8px}
+.fl-row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 12px;border:1px solid var(--csh-line);border-radius:10px;font-size:13.5px}
+.fl-pill{font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:99px}
+.fl-pill.ok{background:#e8f6ee;color:var(--csh-green-dark)}
+.fl-pill.wait{background:#fef3c7;color:#92400e}
+.fl-sample{margin:10px 0 0!important;font-size:12px!important;text-align:center}
+
+/* Services */
+.fl-plan h3{font-size:1.2rem}
+.fl-plan ul{list-style:none;margin:12px 0 16px;padding:0;display:grid;gap:8px;font-size:15px;color:var(--csh-ink)}
+.fl-plan li{display:flex;gap:8px;align-items:flex-start}
+.fl-plan li::before{content:"✓";color:var(--csh-green);font-weight:800}
+.fl-plan .fee{font-weight:700;color:var(--csh-green-dark);margin-bottom:4px!important}
+.fl-plan.pop{border:2px solid var(--csh-green);position:relative}
+.fl-plan.pop::before{content:"Most popular";position:absolute;top:-12px;left:16px;background:var(--csh-green);color:#fff;font-size:12px;font-weight:700;padding:4px 10px;border-radius:99px}
+.fl-plan .csh-btn{width:100%}
+
+/* Steps */
+.fl-steps{counter-reset:s;display:grid;gap:14px;list-style:none;margin:0;padding:0}
+.fl-steps li{counter-increment:s;display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid var(--csh-line);border-radius:14px;padding:16px}
+.fl-steps li::before{content:counter(s);flex:none;width:36px;height:36px;border-radius:50%;background:var(--csh-green);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+.fl-steps p{margin:0;font-size:15px}
+
+/* Form */
+.fl-form-wrap{display:grid;gap:28px}
+.fl-form{display:grid;gap:12px}
+.fl-two{display:grid;gap:12px;grid-template-columns:1fr}
+.fl-field label{display:block;margin-bottom:6px;font-size:13px;font-weight:600;color:var(--csh-muted)}
+.fl-field input,.fl-field select,.fl-field textarea{width:100%;margin:0;padding:0 14px;border:1.5px solid var(--csh-line);border-radius:var(--csh-radius);background:#fff;color:var(--csh-ink);font:500 16px Inter,sans-serif;appearance:none;-webkit-appearance:none}
+.fl-field input,.fl-field select{height:50px}
+.fl-field textarea{padding:12px 14px;min-height:96px;resize:vertical}
+.fl-field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%234b5563' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:38px}
+.fl-field input:focus,.fl-field select:focus,.fl-field textarea:focus{border-color:var(--csh-green);outline:none;box-shadow:0 0 0 3px rgba(31,157,85,.18)}
+.fl-err{color:#b91c1c;font-size:14px;min-height:18px;margin:0!important}
+.fl-small{font-size:13px!important;margin:0!important}
+
+/* FAQ */
+.fl-faq{max-width:780px}
+.fl-faq details{border:1px solid var(--csh-line);border-radius:12px;background:#fff;margin-bottom:10px}
+.fl-faq summary{list-style:none;cursor:pointer;min-height:56px;padding:14px 16px;font-weight:600;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.fl-faq summary::-webkit-details-marker{display:none}
+.fl-faq summary::after{content:"+";font-size:22px;font-weight:500;color:var(--csh-green-dark);flex:none}
+.fl-faq details[open] summary::after{content:"–"}
+.fl-faq details p{margin:0;padding:0 16px 16px}
+
+@media (min-width:640px){
+  .csh-wa-text{display:inline}
+  .fl-grid.c2,.fl-grid.c3,.fl-grid.c4{grid-template-columns:repeat(2,1fr)}
+  .fl-btns{grid-template-columns:auto auto;justify-content:start}
+  .fl-two{grid-template-columns:1fr 1fr}
+}
+@media (min-width:992px){
+  .csh-header,.fl-page{--csh-h:76px}
+  .csh-logo img{height:54px}
+  .csh-header .nav-toggle{display:none}
+  .csh-nav{position:static;flex-direction:row;align-items:center;gap:6px;padding:0;overflow:visible;transform:none;visibility:visible;background:none}
+  .csh-nav a{min-height:44px;padding:0 12px;font-size:16px;border-bottom:0;border-radius:8px}
+  .csh-nav a:hover{background:#f3f4f6}
+  .csh-nav .csh-portal{margin:0 0 0 6px;padding:0 16px;font-size:15px}
+  .fl-page section{padding:72px 0}
+  .fl-hero{padding:64px 0!important}
+  .fl-hero-grid{grid-template-columns:1.1fr .9fr;align-items:center;gap:56px}
+  .fl-grid.c3{grid-template-columns:repeat(3,1fr)}
+  .fl-grid.c4{grid-template-columns:repeat(4,1fr)}
+  .fl-steps{grid-template-columns:repeat(4,1fr)}
+  .fl-steps li{flex-direction:column}
+  .fl-form-wrap{grid-template-columns:.85fr 1.15fr;gap:56px;align-items:start}
+}
+@media (prefers-reduced-motion:reduce){.csh-nav{transition:none}}
+</style>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="csh-header">
+  <div class="csh-wrap csh-bar">
+    <a href="index.html" class="csh-logo" aria-label="Cherry Smart Homes home">
+      <img src="logo.png" width="205" height="54" alt="Cherry Smart Homes — Find your next home">
+    </a>
+    <nav id="site-nav" class="csh-nav" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="properties.html">Properties for Sale</a>
+      <a href="rentals.html">Rentals</a>
+      <a href="bnb.html">Airbnb</a>
+      <a href="for-landlords.html" class="active" aria-current="page">For Landlords</a>
+      <a href="about%20us.html">About Us</a>
+      <a href="tenant-portal.html" class="csh-portal">Tenant Portal</a>
+    </nav>
+    <div class="csh-actions">
+      <a class="csh-wa" target="_blank" rel="noopener"
+         href="https://api.whatsapp.com/send?phone=254700123456&text=Hi%2C%20I%27m%20a%20landlord%20and%20I%27d%20like%20to%20list%20my%20property."
+         aria-label="Chat with us on WhatsApp">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.1 8.1 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+        <span class="csh-wa-text">Chat on WhatsApp</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="fl-page">
+
+  <!-- ===== Hero ===== -->
+  <section class="fl-hero">
+    <div class="csh-wrap fl-hero-grid">
+      <div>
+        <span class="fl-eyebrow">For property owners</span>
+        <h1>Earn from your property without the stress.</h1>
+        <p class="lead">We find good tenants, collect rent through M-Pesa and look after your property, while you follow everything from your phone.</p>
+        <div class="fl-btns">
+          <a class="csh-btn csh-btn-primary" href="#list">List your property</a>
+          <a class="csh-btn csh-btn-outline" target="_blank" rel="noopener" href="https://api.whatsapp.com/send?phone=254700123456&text=Hi%2C%20I%27m%20a%20landlord%20and%20I%27d%20like%20to%20talk%20about%20managing%20my%20property.">Talk to us on WhatsApp</a>
+        </div>
+        <ul class="fl-checks">
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg>Rent paid by M-Pesa and tracked automatically</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg>Every tenant background-checked and reference-verified</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg>One dashboard for all your units</li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="fl-dash" aria-hidden="true">
+          <div class="fl-dash-head">Owner dashboard <span>This month</span></div>
+          <div class="fl-tiles">
+            <div class="fl-tile"><b>12 / 14</b><small>Units occupied</small></div>
+            <div class="fl-tile"><b>KES 168K</b><small>Rent collected</small></div>
+            <div class="fl-tile"><b>2</b><small>Open requests</small></div>
+          </div>
+          <div class="fl-bar"><i></i></div>
+          <div class="fl-bar-lbl"><span>Rent collected</span><span>86%</span></div>
+          <div class="fl-rows">
+            <div class="fl-row"><span>Unit A3 · Rent received</span><span class="fl-pill ok">Paid</span></div>
+            <div class="fl-row"><span>Unit B1 · Rent due 5th</span><span class="fl-pill wait">Pending</span></div>
+            <div class="fl-row"><span>Unit C2 · Tap repair</span><span class="fl-pill wait">In progress</span></div>
+          </div>
+        </div>
+        <p class="fl-sample">Sample view with example figures.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Benefits ===== -->
+  <section>
+    <div class="csh-wrap">
+      <div class="fl-head">
+        <span class="fl-eyebrow">Landlord advantage</span>
+        <h2>Everything handled, nothing hidden</h2>
+        <p>The work that eats your time, done for you.</p>
+      </div>
+      <div class="fl-grid c3">
+        <div class="fl-card"><div class="fl-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/><circle cx="7" cy="15" r="1.2" fill="currentColor" stroke="none"/></svg></div><h3>Automated rent collection</h3><p>Tenants pay via M-Pesa and every payment is recorded. No chasing and no manual reconciliation.</p></div>
+        <div class="fl-card"><div class="fl-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5l8-3z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>Vetted tenants</h3><p>Applicants are background-checked and reference-verified before they sign a lease.</p></div>
+        <div class="fl-card"><div class="fl-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div><h3>Owner dashboard</h3><p>See occupancy, payments and maintenance requests across every unit in one place.</p></div>
+        <div class="fl-card"><div class="fl-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4 2.6-2.6z"/></svg></div><h3>Maintenance handled</h3><p>Tenants report problems to us, and we arrange trusted repairs and keep you updated.</p></div>
+        <div class="fl-card"><div class="fl-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11L12 3L21 11"/><path d="M5 10V20H19V10"/></svg></div><h3>Fewer empty months</h3><p>Your property is listed on our website and WhatsApp, so we can fill vacancies quickly.</p></div>
+        <div class="fl-card"><div class="fl-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 3h10l4 4v14H3V7z"/><path d="M8 12h8M8 16h5"/></svg></div><h3>Clear leases and records</h3><p>Proper tenancy agreements, receipts and statements, so your paperwork is always in order.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Services ===== -->
+  <section class="fl-alt" id="services">
+    <div class="csh-wrap">
+      <div class="fl-head">
+        <span class="fl-eyebrow">Our services</span>
+        <h2>Choose how much you want us to do</h2>
+        <p>Not sure which fits? Tell us about your property and we'll recommend one.</p>
+      </div>
+      <!-- EDIT: replace the fee lines and bullets with your real packages and rates -->
+      <div class="fl-grid c3">
+        <div class="fl-card fl-plan">
+          <h3>Find a tenant</h3>
+          <p class="fee">Ask for a quote</p>
+          <p>For owners who want to manage the property themselves.</p>
+          <ul><li>Listing on our website and WhatsApp</li><li>Viewings arranged for you</li><li>Tenant screening and references</li><li>Lease agreement prepared</li></ul>
+          <a class="csh-btn csh-btn-outline" href="#list" data-plan="Find a tenant">Choose this</a>
+        </div>
+        <div class="fl-card fl-plan pop">
+          <h3>Full property management</h3>
+          <p class="fee">Ask for a quote</p>
+          <p>We run the property day to day, and you collect the income.</p>
+          <ul><li>Everything in "Find a tenant"</li><li>M-Pesa rent collection and receipts</li><li>Maintenance and repairs coordination</li><li>Owner dashboard and monthly statements</li></ul>
+          <a class="csh-btn csh-btn-primary" href="#list" data-plan="Full property management">Choose this</a>
+        </div>
+        <div class="fl-card fl-plan">
+          <h3>Airbnb management</h3>
+          <p class="fee">Ask for a quote</p>
+          <p>Turn your furnished unit into a short-stay earner.</p>
+          <ul><li>Listing, pricing and guest messaging</li><li>Check-in, cleaning and linen</li><li>Payments and booking records</li><li>Owner dashboard and reports</li></ul>
+          <a class="csh-btn csh-btn-outline" href="#list" data-plan="Airbnb management">Choose this</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== How it works ===== -->
+  <section>
+    <div class="csh-wrap">
+      <div class="fl-head">
+        <span class="fl-eyebrow">How it works</span>
+        <h2>From first message to first rent</h2>
+      </div>
+      <ol class="fl-steps">
+        <li><div><h3>Tell us about it</h3><p>Send your property details using the form below or on WhatsApp.</p></div></li>
+        <li><div><h3>We visit and advise</h3><p>We view the property and recommend the right rent and service.</p></div></li>
+        <li><div><h3>We list and screen</h3><p>Your property goes live, and we vet every applicant.</p></div></li>
+        <li><div><h3>You get paid</h3><p>Rent comes in through M-Pesa and you follow it on your dashboard.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===== Form ===== -->
+  <section class="fl-alt" id="list">
+    <div class="csh-wrap fl-form-wrap">
+      <div>
+        <span class="fl-eyebrow">List your property</span>
+        <h2>Tell us about your property</h2>
+        <p>It takes about a minute. We'll reply on WhatsApp to arrange a visit and discuss the best option for you.</p>
+        <ul class="fl-checks">
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg>No obligation to sign up</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg>Single units to whole buildings</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12l5 5L20 7"/></svg>Your details are only used to contact you</li>
+        </ul>
+      </div>
+      <div class="fl-card">
+        <form class="fl-form" id="owner-form" novalidate>
+          <div class="fl-two">
+            <div class="fl-field"><label for="o-name">Full name *</label><input id="o-name" required autocomplete="name" placeholder="Your name"></div>
+            <div class="fl-field"><label for="o-phone">Phone number *</label><input id="o-phone" type="tel" inputmode="tel" required autocomplete="tel" placeholder="07XX XXX XXX"></div>
+          </div>
+          <div class="fl-field"><label for="o-loc">Where is the property? *</label><input id="o-loc" required placeholder="e.g. Kawangware, Nairobi"></div>
+          <div class="fl-two">
+            <div class="fl-field">
+              <label for="o-type">Property type</label>
+              <select id="o-type">
+                <option>Single rooms / bedsitters</option>
+                <option>Apartments</option>
+                <option>House / maisonette</option>
+                <option>Furnished unit (Airbnb)</option>
+                <option>Commercial</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="fl-field"><label for="o-units">Number of units</label><input id="o-units" type="number" min="1" inputmode="numeric" placeholder="e.g. 8"></div>
+          </div>
+          <div class="fl-field">
+            <label for="o-service">What do you need?</label>
+            <select id="o-service">
+              <option>Not sure yet</option>
+              <option>Find a tenant</option>
+              <option>Full property management</option>
+              <option>Airbnb management</option>
+              <option>Sell my property</option>
+            </select>
+          </div>
+          <div class="fl-field"><label for="o-msg">Anything else? (optional)</label><textarea id="o-msg" placeholder="e.g. 3 units are vacant, expected rent KES 12,000 each"></textarea></div>
+          <p class="fl-err" id="o-err" role="alert"></p>
+          <button class="csh-btn csh-btn-primary" type="submit">Send details on WhatsApp</button>
+          <p class="fl-small">This opens WhatsApp with your details ready to send.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section>
+    <div class="csh-wrap">
+      <div class="fl-head">
+        <span class="fl-eyebrow">Questions landlords ask</span>
+        <h2>Good to know</h2>
+      </div>
+      <!-- EDIT these answers to match your real terms -->
+      <div class="fl-faq">
+        <details><summary>How much do you charge?</summary><p>Our fee depends on the service and the number of units. Send us your details and we'll give you a clear quote before you commit.</p></details>
+        <details><summary>How do I receive my rent?</summary><p>Tenants pay through M-Pesa and every payment is recorded. We send your rent to you and share a statement so you always know where the money is.</p></details>
+        <details><summary>How do you choose tenants?</summary><p>We check each applicant's background and references before any lease is signed, and you stay informed throughout.</p></details>
+        <details><summary>Can I still keep control of my property?</summary><p>Yes. You see everything on your owner dashboard and you approve major decisions such as big repairs.</p></details>
+        <details><summary>Do you manage only Nairobi properties?</summary><p>We focus on Nairobi and surrounding areas. If your property is elsewhere, message us and we'll let you know if we can help.</p></details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-col">
+      <div class="footer-logo">
+        <svg class="mark" viewBox="0 0 24 24" fill="none"><path d="M3 11L12 3L21 11" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M5 10V20H19V10" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
+        <span><span class="l1">Cherry Smart Homes</span></span>
+      </div>
+      <p>Smart property management and modern living in Kenya. Verified rentals, transparent pricing, and a dashboard built for landlords and tenants alike.</p>
+      <div class="socials">
+        <a href="#" aria-label="Facebook">f</a><a href="#" aria-label="Twitter">𝕏</a><a href="#" aria-label="Instagram">◎</a><a href="#" aria-label="LinkedIn">in</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Site</h5>
+      <ul>
+        <li><a href="index.html">Find a Home</a></li>
+        <li><a href="rentals.html">Rentals</a></li>
+        <li><a href="properties.html">Properties for Sale</a></li>
+        <li><a href="bnb.html">Airbnb</a></li>
+        <li><a href="for-landlords.html">For Landlords</a></li>
+        <li><a href="about%20us.html">About Us</a></li>
+        <li><a href="tenant-portal.html">Tenant Portal</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li>0700 123 456</li>
+        <li>hello@cherrysmarthomes.co.ke</li>
+        <li>Mon – Sat, 8:00 AM – 6:00 PM</li>
+      </ul>
+      <h5 style="margin-top:26px;">Legal</h5>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Use</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Visit Our Office</h5>
+      <p style="margin-bottom:8px;">Kindaruma Road, Kilimani, Nairobi, Kenya</p>
+      <a href="about%20us.html#contact">Get directions →</a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© 2026 Cherry Smart Homes Ltd. All Rights Reserved.</span>
+    <div class="links"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a><a href="#">Sitemap</a></div>
+  </div>
+</footer>
+
+<a class="whatsapp-float" href="https://api.whatsapp.com/send?phone=254700123456&text=Hi,%20I'm%20a%20landlord%20and%20I'd%20like%20to%20list%20my%20property." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.1 8.1 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+</a>
+
+<script>
+(function(){
+  var PHONE='254700123456'; // replace with your real WhatsApp number
+  var $=function(id){return document.getElementById(id)};
+
+  /* Plan buttons pre-select the service in the form */
+  document.querySelectorAll('[data-plan]').forEach(function(a){
+    a.addEventListener('click',function(){
+      var plan=a.getAttribute('data-plan'),sel=$('o-service');
+      for(var i=0;i<sel.options.length;i++){if(sel.options[i].text===plan){sel.selectedIndex=i;break}}
+    });
+  });
+
+  /* Owner form -> WhatsApp */
+  $('owner-form').addEventListener('submit',function(e){
+    e.preventDefault();
+    var name=$('o-name').value.trim(),phone=$('o-phone').value.trim(),loc=$('o-loc').value.trim();
+    if(!name||!phone||!loc){$('o-err').textContent='Please fill in your name, phone number and the property location.';return}
+    $('o-err').textContent='';
+    var units=$('o-units').value.trim(),extra=$('o-msg').value.trim();
+    var msg='Hi Cherry Smart Homes, I am a landlord and I would like to list my property.\n\n'+
+      'Name: '+name+'\nPhone: '+phone+'\nLocation: '+loc+
+      '\nProperty type: '+$('o-type').value+
+      (units?'\nUnits: '+units:'')+
+      '\nService needed: '+$('o-service').value+
+      (extra?'\n\nNotes: '+extra:'');
+    window.open('https://api.whatsapp.com/send?phone='+PHONE+'&text='+encodeURIComponent(msg),'_blank','noopener');
+  });
+
+  /* Mobile nav */
+  var toggle=document.querySelector('.csh-header .nav-toggle'),nav=$('site-nav');
+  function setMenu(o){nav.classList.toggle('open',o);document.body.classList.toggle('csh-menu-open',o);toggle.setAttribute('aria-expanded',o);toggle.setAttribute('aria-label',o?'Close menu':'Open menu')}
+  toggle.addEventListener('click',function(){setMenu(!nav.classList.contains('open'))});
+  nav.addEventListener('click',function(e){if(e.target.closest('a'))setMenu(false)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')setMenu(false)});
+  window.matchMedia('(min-width:992px)').addEventListener('change',function(e){if(e.matches)setMenu(false)});
+})();
+</script>
+</body>
+</html>

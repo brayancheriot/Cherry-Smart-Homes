@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cherry Smart Homes — Smart Property Management & Modern Living in Kenya</title>
+<meta name="description" content="Verified rental homes in Kawangware and across Nairobi. Tell us your area, budget and house type and we'll match you with available homes.">
+<meta property="og:title" content="Cherry Smart Homes — Find a Home That Fits Your Budget">
+<meta property="og:description" content="Verified rental homes in Kawangware and across Nairobi.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/pages/home.css">
+
+<!-- New header + hero styles. All classes are prefixed "csh-" so they cannot clash with your existing CSS. -->
+<style>
+.csh-header,.csh-hero{
+  --csh-green:#1f9d55;--csh-green-dark:#177a42;--csh-gold:#c8962b;
+  --csh-ink:#121a24;--csh-muted:#4b5563;--csh-line:#e5e7eb;
+  --csh-h:64px;--csh-radius:10px;
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--csh-ink)
+}
+.csh-header *,.csh-hero *,.csh-header *::before,.csh-hero *::before{box-sizing:border-box}
+.csh-header a,.csh-hero a{text-decoration:none;color:inherit}
+.csh-header :focus-visible,.csh-hero :focus-visible{outline:3px solid var(--csh-gold);outline-offset:2px;border-radius:6px}
+.csh-wrap{width:100%;max-width:1200px;margin:0 auto;padding:0 20px}
+
+/* Buttons */
+.csh-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:var(--csh-radius);font:600 16px/1 Inter,sans-serif;border:1.5px solid transparent;cursor:pointer;text-align:center;transition:background .2s,color .2s,border-color .2s}
+.csh-btn-primary{background:var(--csh-green);color:#fff}
+.csh-btn-primary:hover{background:var(--csh-green-dark)}
+.csh-btn-outline{background:#fff;color:var(--csh-ink);border-color:var(--csh-ink)}
+.csh-btn-outline:hover{background:var(--csh-ink);color:#fff}
+
+/* Header */
+.csh-header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid var(--csh-line);padding-top:env(safe-area-inset-top,0px)}
+.csh-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;height:var(--csh-h)}
+.csh-logo img{height:46px;width:auto}
+.csh-actions{display:flex;align-items:center;gap:8px}
+.csh-wa{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;min-width:44px;padding:0 12px;border-radius:var(--csh-radius);background:var(--csh-green);color:#fff!important;font-weight:600;font-size:14px}
+.csh-wa-text{display:none}
+.csh-header .nav-toggle{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;border:1px solid var(--csh-line);border-radius:var(--csh-radius);background:#fff;color:var(--csh-ink);cursor:pointer}
+
+/* Mobile drawer */
+.csh-nav{position:fixed;inset:calc(var(--csh-h) + env(safe-area-inset-top,0px)) 0 0 0;background:#fff;display:flex;flex-direction:column;padding:12px 20px calc(24px + env(safe-area-inset-bottom,0px));overflow-y:auto;transform:translateX(100%);visibility:hidden;transition:transform .25s ease,visibility .25s}
+.csh-nav.open{transform:none;visibility:visible}
+.csh-nav a{display:flex;align-items:center;min-height:56px;font-size:18px;font-weight:500;border-bottom:1px solid var(--csh-line)}
+.csh-nav a.active{color:var(--csh-green);font-weight:700}
+.csh-nav .csh-portal{margin-top:20px;justify-content:center;border:1.5px solid var(--csh-ink);border-radius:var(--csh-radius);font-size:16px;font-weight:600}
+body.csh-menu-open{overflow:hidden}
+
+/* Hero */
+.csh-hero{position:relative;overflow:hidden;background:#f6f8f7}
+.csh-hero::before{content:"";position:absolute;inset:0;background:url("https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=70&w=900&auto=format&fit=crop") center/cover no-repeat;opacity:.22}
+.csh-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(255,255,255,.75))}
+.csh-hero-inner{position:relative;z-index:1;padding:28px 0 36px}
+.csh-hero h1{margin:0 0 12px;font-size:clamp(1.9rem,7.5vw,3.6rem);line-height:1.08;font-weight:800;letter-spacing:-.02em;max-width:16ch;color:var(--csh-ink)}
+.csh-lead{margin:0 0 8px;font-size:clamp(1.05rem,3.6vw,1.4rem);font-weight:600;max-width:34ch}
+.csh-sub{margin:0 0 22px;color:var(--csh-muted);font-size:1rem;max-width:52ch}
+
+.csh-search{background:#fff;border:1px solid var(--csh-line);border-radius:14px;padding:16px;box-shadow:0 10px 30px rgba(18,26,36,.08);max-width:980px}
+.csh-grid{display:grid;grid-template-columns:1fr;gap:12px}
+.csh-field label{display:block;margin-bottom:6px;font-size:13px;font-weight:600;color:var(--csh-muted)}
+.csh-field input,.csh-field select{width:100%;height:50px;margin:0;padding:0 14px;border:1.5px solid var(--csh-line);border-radius:var(--csh-radius);background:#fff;color:var(--csh-ink);font:500 16px Inter,sans-serif;appearance:none;-webkit-appearance:none}
+.csh-field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%234b5563' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:38px}
+.csh-field input:focus,.csh-field select:focus{border-color:var(--csh-green);outline:none;box-shadow:0 0 0 3px rgba(31,157,85,.18)}
+.csh-actions-row{display:grid;gap:10px;margin-top:14px}
+.csh-actions-row .csh-btn{width:100%}
+.csh-wa-link{color:var(--csh-green-dark);border-color:var(--csh-green)}
+.csh-wa-link:hover{background:var(--csh-green);color:#fff}
+
+.csh-badge{display:inline-flex;align-items:center;gap:10px;margin-top:20px;padding:10px 14px;background:#fff;border:1px solid var(--csh-line);border-radius:var(--csh-radius);font-size:14px}
+.csh-badge .dot{width:10px;height:10px;border-radius:50%;background:var(--csh-green);flex:none}
+.csh-badge strong{display:block;font-size:14px}
+.csh-badge .s{color:var(--csh-muted);font-size:12.5px}
+
+@media (min-width:640px){
+  .csh-grid{grid-template-columns:1fr 1fr}
+  .csh-actions-row{grid-template-columns:1fr 1fr}
+  .csh-wa-text{display:inline}
+}
+@media (min-width:992px){
+  .csh-header,.csh-hero{--csh-h:76px}
+  .csh-logo img{height:54px}
+  .csh-header .nav-toggle{display:none}
+  .csh-nav{position:static;flex-direction:row;align-items:center;gap:6px;padding:0;overflow:visible;transform:none;visibility:visible;background:none}
+  .csh-nav a{min-height:44px;padding:0 12px;font-size:16px;border-bottom:0;border-radius:8px}
+  .csh-nav a:hover{background:#f3f4f6}
+  .csh-nav .csh-portal{margin:0 0 0 6px;padding:0 16px;font-size:15px}
+  .csh-hero::before{opacity:1;background-position:right center;background-size:60% auto}
+  .csh-hero::after{background:linear-gradient(90deg,#fff 0%,#fff 38%,rgba(255,255,255,.55) 62%,rgba(255,255,255,0) 100%)}
+  .csh-hero-inner{padding:72px 0 80px}
+  .csh-grid{grid-template-columns:1.3fr 1fr 1fr}
+  .csh-actions-row{grid-template-columns:auto auto;justify-content:start}
+  .csh-actions-row .csh-btn{width:auto;min-width:200px}
+}
+@media (prefers-reduced-motion:reduce){.csh-nav{transition:none}}
+</style>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="csh-header">
+  <div class="csh-wrap csh-bar">
+    <a href="index.html" class="csh-logo" aria-label="Cherry Smart Homes home">
+      <!-- Tip: rename this file (no spaces), e.g. assets/img/logo.png, and update the src -->
+      <img src="logo.png" width="205" height="54" alt="Cherry Smart Homes — Find your next home">
+    </a>
+
+    <nav id="site-nav" class="csh-nav" aria-label="Main">
+      <a href="index.html" class="active" aria-current="page">Home</a>
+      <a href="properties.html?type=sale">Properties for Sale</a>
+      <a href="rentals.html?type=rent">Rentals</a>
+      <a href="bnb.html">Airbnb</a>
+      <a href="for-landlords.html">For Landlords</a>
+      <a href="about%20us.html#contact">About Us</a>
+      <a href="tenant-portal.html" class="csh-portal">Tenant Portal</a>
+    </nav>
+
+    <div class="csh-actions">
+      <a class="csh-wa" target="_blank" rel="noopener"
+         href="https://api.whatsapp.com/send?phone=254700123456&text=Hi%2C%20I%27d%20like%20to%20learn%20more%20about%20your%20properties."
+         aria-label="Chat with us on WhatsApp">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.1 8.1 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+        <span class="csh-wa-text">Chat on WhatsApp</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="csh-hero" aria-labelledby="hero-title">
+  <div class="csh-wrap csh-hero-inner">
+    <h1 id="hero-title">Find a home that fits your budget.</h1>
+    <p class="csh-lead">Verified rental homes in Kawangware and across Nairobi.</p>
+    <p class="csh-sub">Tell us where you want to live, your budget and the type of house you need. We'll show you available homes that match.</p>
+
+    <style>
+      .csh-field-any{margin-bottom:14px}
+      .csh-hint{margin:8px 0 0;font-size:13.5px;line-height:1.45;color:#4b5563;min-height:20px}
+      .csh-hint strong{color:#177a42;font-weight:700}
+      .csh-hint .miss{color:#92400e}
+      #budget:disabled{opacity:.55}
+    </style>
+
+    <form class="csh-search" id="home-search" action="rentals.html" method="get" aria-label="Search homes">
+      <input type="hidden" name="type" value="rent">
+
+      <!-- NEW: type anything -->
+      <div class="csh-field csh-field-any">
+        <label for="hs-any">What are you looking for?</label>
+        <input id="hs-any" type="search" autocomplete="off" enterkeyhint="search" placeholder="e.g. properties for sale/rentals/Airbnb under 15000 budget">
+        <p class="csh-hint" id="hs-hint" aria-live="polite">Type it your way and we'll fill in the boxes below.</p>
+      </div>
+
+      <div class="csh-grid">
+        <div class="csh-field">
+          <label for="area">Where do you want to live?</label>
+          <input id="area" name="area" type="text" list="areas" placeholder="e.g. Kawangware" autocomplete="off">
+          <datalist id="areas">
+            <option value="Kawangware"><option value="Kilimani"><option value="Westlands">
+            <option value="Lavington"><option value="Kasarani"><option value="Githurai">
+            <option value="Umoja"><option value="Ruaka"><option value="Rongai"><option value="Kahawa">
+          </datalist>
+        </div>
+        <div class="csh-field">
+          <label for="budget">Monthly budget</label>
+          <select id="budget" name="budget">
+            <option value="">Any budget</option>
+            <option value="0-8000">Under KES 8,000</option>
+            <option value="8000-15000">KES 8,000 – 15,000</option>
+            <option value="15000-30000">KES 15,000 – 30,000</option>
+            <option value="30000-60000">KES 30,000 – 60,000</option>
+            <option value="60000-">Above KES 60,000</option>
+          </select>
+        </div>
+        <div class="csh-field">
+          <label for="beds">House type</label>
+          <select id="beds" name="beds">
+            <option value="">Any type</option>
+            <option value="single">Single room</option>
+            <option value="bedsitter">Bedsitter</option>
+            <option value="1">1 bedroom</option>
+            <option value="2">2 bedrooms</option>
+            <option value="3">3+ bedrooms</option>
+          </select>
+        </div>
+      </div>
+      <div class="csh-actions-row">
+        <button class="csh-btn csh-btn-primary" type="submit">Search</button>
+        <a class="csh-btn csh-btn-outline csh-wa-link" id="wa-request" target="_blank" rel="noopener" href="#">Send request on WhatsApp</a>
+      </div>
+    </form>
+
+    <script>
+    (function(){
+      var $=function(i){return document.getElementById(i)};
+      var form=$('home-search'),any=$('hs-any'),hint=$('hs-hint'),area=$('area'),
+          budget=$('budget'),beds=$('beds'),wa=$('wa-request'),typeEl=form.querySelector('[name="type"]');
+      if(!form||!any)return;
+
+      /* Your WhatsApp number is read from the header button. Fallback below. */
+      var PHONE='254700123456';
+      var hw=document.querySelector('a[href*="phone="]');
+      if(hw){var pm=/phone=(\d+)/.exec(hw.getAttribute('href'));if(pm)PHONE=pm[1]}
+
+      /* Where each kind of search goes */
+      var PAGES={rent:'rentals.html',sale:'properties-for-sale.html',stay:'bnb.html'};
+
+      var AREAS=[].map.call(document.querySelectorAll('#areas option'),function(o){return o.value});
+      var STOP=' a an the in at on of for to me i we my is are and or with near nearby find looking look need want get any some place places house houses home homes room rooms cheap cheapest affordable nice good best available please show search kenya nairobi under below over above about up max min budget price ksh kes bedroom bedrooms bed beds ';
+      var N='(\\d+(?:\\.\\d+)?)\\s*(k|m|million|thousand)?';
+      var WN={one:1,two:2,three:3,four:4,five:5,six:6};
+      function val(n,s){var v=parseFloat(n);if(s==='k'||s==='thousand')v*=1e3;else if(s==='m'||s==='million')v*=1e6;return v}
+      function rx(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}
+      function kes(n){return 'KES '+Number(n).toLocaleString('en-KE')}
+
+      /* ---------- Understand the sentence ---------- */
+      function parse(text){
+        var t=' '+text.toLowerCase().replace(/(\d),(?=\d{3})/g,'$1').replace(/[,;:!?"()]/g,' ')
+          .replace(/\b(kes|kshs?|sh)\.?(?=\s*\d)/g,' ').replace(/\s+/g,' ')+' ';
+        var r={mode:'rent',area:'',beds:'',min:0,max:0,guests:0,left:[]};
+        function take(re,fn){var m=re.exec(t);if(!m)return false;t=t.slice(0,m.index)+' '+t.slice(m.index+m[0].length);if(fn)fn(m);return true}
+
+        if(take(/\b(for sale|to buy|buying|buy|purchase|sale)\b/))r.mode='sale';
+        else if(take(/\b(airbnb|bnb|short[- ]?stays?|nightly|per night|a night|vacation|holiday)\b/))r.mode='stay';
+        else take(/\b(for rent|to rent|to let|rentals?|renting|rent|lease)\b/);
+
+        take(/(\d+)\s*(?:guests?|people|persons?|pax|adults?)\b/,function(m){r.guests=+m[1];if(r.mode==='rent')r.mode='stay'});
+
+        if(take(/\b(bedsitters?|bed sitters?|bedsits?|studios?)\b/))r.beds='bedsitter';
+        else if(take(/\bsingle(?: rooms?)?\b/))r.beds='single';
+        else take(/\b(\d+|one|two|three|four|five|six)\s*-?\s*(?:bedrooms?|beds?|br|bdrm)s?\b/,function(m){var n=WN[m[1]]||+m[1];r.beds=n>=3?'3':String(n)});
+
+        var m=new RegExp('\\b(?:between\\s+)?'+N+'\\s*(?:-|to|and)\\s*'+N+'(?!\\d)').exec(t);
+        if(m){
+          var a=(!m[2]&&m[4])?val(m[1],m[4]):val(m[1],m[2]),b=val(m[3],m[4]);
+          if(a>=500&&b>=500){t=t.slice(0,m.index)+' '+t.slice(m.index+m[0].length);r.min=Math.min(a,b);r.max=Math.max(a,b)}
+        }
+        if(!r.max)take(new RegExp('\\b(?:under|below|less than|upto|up to|within|at most|not more than|max(?:imum)?|budget(?: of| is)?|around|about)\\s*'+N),function(x){var v=val(x[1],x[2]);if(v>=500)r.max=v});
+        if(!r.min&&!r.max)take(new RegExp('\\b(?:above|over|more than|from|at least|min(?:imum)?)\\s*'+N),function(x){var v=val(x[1],x[2]);if(v>=500)r.min=v});
+        if(!r.min&&!r.max)take(new RegExp('(?:^|\\s)'+N+'(?=\\s|$)'),function(x){var v=val(x[1],x[2]);if(v>=1000)r.max=v});
+        if(r.mode==='rent'&&(r.max>=500000||r.min>=500000))r.mode='sale';
+
+        AREAS.forEach(function(ar){if(!r.area)take(new RegExp('\\b'+rx(ar.toLowerCase())+'\\b'),function(){r.area=ar})});
+
+        t.split(/\s+/).forEach(function(w){
+          if(w.length>=3&&!/\d/.test(w)&&STOP.indexOf(' '+w+' ')<0&&r.left.indexOf(w)<0)r.left.push(w);
+        });
+        return r;
+      }
+
+      /* Pick the budget option that fits the amount typed */
+      function budgetFor(r){
+        var x=r.max||r.min;if(!x)return null;
+        var opts=[].slice.call(budget.options).filter(function(o){return o.value});
+        if(r.min&&r.max){                       /* "between 10k and 20k": best overlap */
+          var best=null,bestLen=0;
+          opts.forEach(function(o){
+            var p=o.value.split('-'),lo=+p[0]||0,hi=p[1]?+p[1]:Infinity;
+            var len=Math.min(hi,r.max)-Math.max(lo,r.min);
+            if(len>bestLen){bestLen=len;best=o}
+          });
+          if(best)return best;
+        }
+        for(var i=0;i<opts.length;i++){
+          var p=opts[i].value.split('-'),lo=+p[0]||0,hi=p[1]?+p[1]:Infinity;
+          if(r.max?(x>lo&&x<=hi):(x>=lo&&x<hi))return opts[i];
+        }
+        return opts[opts.length-1];
+      }
+
+      /* ---------- Fill the form ---------- */
+      var guestsEl=null;
+      function apply(){
+        var text=any.value.trim();
+        hint.className='csh-hint';
+        if(!text){
+          hint.textContent="Type it your way and we'll fill in the boxes below.";
+          setMode('rent');updateWa();return;
+        }
+        var r=parse(text),got=[];
+        setMode(r.mode,r.guests);
+        if(r.mode==='sale')got.push('For sale');
+        if(r.mode==='stay')got.push('Airbnb / short stay');
+        if(r.area){area.value=r.area;got.push(r.area)}
+        if(r.beds){beds.value=r.beds;got.push(beds.options[beds.selectedIndex].text)}
+        if(r.guests)got.push(r.guests+(r.guests>1?' guests':' guest'));
+        var bo=budgetFor(r);
+        if(bo&&r.mode==='rent'){budget.value=bo.value;got.push('Budget '+bo.text)}
+
+        hint.innerHTML='';
+        if(got.length){
+          var s=document.createElement('strong');s.textContent='Understood: ';
+          hint.appendChild(s);hint.appendChild(document.createTextNode(got.join(' · ')));
+        }
+        if(r.left.length){
+          var m=document.createElement('span');m.className='miss';
+          m.textContent=(got.length?'  ':'')+"Couldn't use: "+r.left.join(', ')+'.';
+          hint.appendChild(m);
+        }
+        if(!got.length&&!r.left.length)hint.textContent="Type it your way and we'll fill in the boxes below.";
+        updateWa();
+      }
+
+      /* Send rent, sale and Airbnb searches to the right page */
+      function setMode(mode,guests){
+        form.action=PAGES[mode]||PAGES.rent;
+        typeEl.value=mode;
+        budget.disabled=(mode!=='rent');          /* only the rentals page uses the budget box */
+        if(mode==='stay'&&guests){
+          if(!guestsEl){guestsEl=document.createElement('input');guestsEl.type='hidden';guestsEl.name='guests';form.appendChild(guestsEl)}
+          guestsEl.value=guests;
+        }else if(guestsEl){guestsEl.remove();guestsEl=null}
+      }
+
+      /* WhatsApp message built from what they typed and picked */
+      function updateWa(){
+        var parts=[];
+        if(any.value.trim())parts.push('Looking for: '+any.value.trim());
+        parts.push('Area: '+(area.value.trim()||'any area in Nairobi'));
+        if(!budget.disabled)parts.push('Budget: '+(budget.value?budget.options[budget.selectedIndex].text:'flexible'));
+        parts.push('Type: '+(beds.value?beds.options[beds.selectedIndex].text:'any'));
+        wa.href='https://api.whatsapp.com/send?phone='+PHONE+'&text='+encodeURIComponent('Hi Cherry Smart Homes, I need help finding a home.\n'+parts.join('\n'));
+      }
+
+      any.addEventListener('input',apply);
+      /* run after any other script on the page that also sets the WhatsApp link */
+      form.addEventListener('input',function(){setTimeout(updateWa,0)});
+      form.addEventListener('change',function(){setTimeout(updateWa,0)});
+      updateWa();
+    })();
+    </script>
+
+    <div class="csh-badge">
+      <span class="dot" aria-hidden="true"></span>
+      <div><strong>500+ verified homes</strong><span class="s">Managed across Nairobi &amp; beyond</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Header + hero behaviour (runs before main.js so the menu button is handled here once) -->
+<script>
+(function(){
+  var toggle=document.querySelector('.csh-header .nav-toggle'),
+      nav=document.getElementById('site-nav');
+  function setMenu(open){
+    nav.classList.toggle('open',open);
+    document.body.classList.toggle('csh-menu-open',open);
+    toggle.setAttribute('aria-expanded',open);
+    toggle.setAttribute('aria-label',open?'Close menu':'Open menu');
+  }
+  toggle.addEventListener('click',function(e){
+    e.stopImmediatePropagation(); // stops main.js from also toggling
+    setMenu(!nav.classList.contains('open'));
+  });
+  nav.addEventListener('click',function(e){if(e.target.closest('a'))setMenu(false)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')setMenu(false)});
+  window.matchMedia('(min-width:992px)').addEventListener('change',function(e){if(e.matches)setMenu(false)});
+
+  var form=document.getElementById('home-search'),
+      wa=document.getElementById('wa-request'),
+      PHONE='254700123456'; // replace with your real WhatsApp number
+  function label(sel){return sel.options[sel.selectedIndex].text}
+  function buildLink(){
+    var area=form.area.value.trim()||'any area in Nairobi',
+        budget=form.budget.value?label(form.budget):'flexible budget',
+        type=form.beds.value?label(form.beds):'any house type';
+    var msg='Hi Cherry Smart Homes, I am looking for a rental.\nArea: '+area+'\nBudget: '+budget+'\nType: '+type;
+    wa.href='https://api.whatsapp.com/send?phone='+PHONE+'&text='+encodeURIComponent(msg);
+  }
+  form.addEventListener('input',buildLink);
+  buildLink();
+})();
+</script>
+
+<!-- ===== FEATURED PROPERTY LISTINGS ===== -->
+<section class="listings-section">
+  <div class="container">
+    <div class="section-head">
+      <h2>Featured Property Listings</h2>
+    </div>
+    <div class="listings-grid">
+      <div class="listing-card">
+        <div class="listing-img">
+          <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=700&auto=format&fit=crop" alt="2 Bedroom Apartment in Westlands">
+          <span class="listing-badge featured">Featured</span>
+          <span class="listing-heart">♡</span>
+        </div>
+        <div class="listing-body">
+          <div class="listing-price">KES 47,000 <span>/month</span></div>
+          <div class="listing-addr">Westlands, Nairobi</div>
+          <div class="listing-specs"><span>🛏 2 Beds</span><span>🛁 2 Baths</span><span>▭ 95 m²</span></div>
+          <div class="listing-btns">
+            <a href="property-detail.html" class="btn btn-red">View Details</a>
+            <a href="#" class="btn btn-outline" data-open-booking-modal>Book Viewing</a>
+          </div>
+        </div>
+      </div>
+      <div class="listing-card">
+        <div class="listing-img">
+          <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=700&auto=format&fit=crop" alt="3 Bedroom Apartment in Kilimani">
+          <span class="listing-badge new">New</span>
+          <span class="listing-heart">♡</span>
+        </div>
+        <div class="listing-body">
+          <div class="listing-price">KES 45,000 <span>/month</span></div>
+          <div class="listing-addr">Kilimani, Nairobi</div>
+          <div class="listing-specs"><span>🛏 3 Beds</span><span>🛁 2 Baths</span><span>▭ 130 m²</span></div>
+          <div class="listing-btns">
+            <a href="property-detail.html" class="btn btn-red">View Details</a>
+            <a href="#" class="btn btn-outline" data-open-booking-modal>Book Viewing</a>
+          </div>
+        </div>
+      </div>
+      <div class="listing-card">
+        <div class="listing-img">
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=700&auto=format&fit=crop" alt="Studio Apartment in Lavington">
+          <span class="listing-badge featured">Featured</span>
+          <span class="listing-heart">♡</span>
+        </div>
+        <div class="listing-body">
+          <div class="listing-price">KES 45,000 <span>/month</span></div>
+          <div class="listing-addr">Lavington, Nairobi</div>
+          <div class="listing-specs"><span>🛏 1 Bed</span><span>🛁 1 Bath</span><span>▭ 60 m²</span></div>
+          <div class="listing-btns">
+            <a href="property-detail.html" class="btn btn-red">View Details</a>
+            <a href="#" class="btn btn-outline" data-open-booking-modal>Book Viewing</a>
+          </div>
+        </div>
+      </div>
+      <div class="listing-card">
+        <div class="listing-img">
+          <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?q=80&w=700&auto=format&fit=crop" alt="4 Bedroom House in Karen">
+          <span class="listing-badge featured">Featured</span>
+          <span class="listing-heart">♡</span>
+        </div>
+        <div class="listing-body">
+          <div class="listing-price">KES 8.3M</div>
+          <div class="listing-addr">Karen, Nairobi</div>
+          <div class="listing-specs"><span>🛏 4 Beds</span><span>🛁 3 Baths</span><span>▭ 240 m²</span></div>
+          <div class="listing-btns">
+            <a href="property-detail.html" class="btn btn-red">View Details</a>
+            <a href="#" class="btn btn-outline" data-open-booking-modal>Book Viewing</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LANDLORD ADVANTAGE ===== -->
+<section class="advantage-section">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow" style="text-align:center;">For Property Owners</div>
+      <h2>Landlord Advantage</h2>
+      <p>Everything you need to manage your rental property without the manual work.</p>
+    </div>
+    <div class="advantage-grid">
+      <div class="advantage-card">
+        <div class="ai">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/><circle cx="7" cy="15" r="1.2" fill="currentColor" stroke="none"/></svg>
+        </div>
+        <h4>Automated Rent Collection (M-Pesa)</h4>
+        <p>Tenants pay via M-Pesa and it's tracked automatically — no more chasing payments or manual reconciliation.</p>
+      </div>
+      <div class="advantage-card">
+        <div class="ai">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5l8-3z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <h4>Vetted Tenant Screening</h4>
+        <p>Every applicant is background-checked and reference-verified before they ever see a lease agreement.</p>
+      </div>
+      <div class="advantage-card">
+        <div class="ai">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        </div>
+        <h4>Bespoke Owner Dashboard</h4>
+        <p>Track occupancy, payments, and maintenance requests across every unit you own, in one place.</p>
+      </div>
+    </div>
+    <div class="advantage-cta">
+      <a href="for-landlords.html" class="btn btn-red">List Your Property</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STATS ===== -->
+<div class="stats-bar">
+  <div class="container stats-grid">
+    <div class="stat">
+      <svg class="si" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11L12 3L21 11"/><path d="M5 10V20H19V10"/></svg>
+      <div><div class="num" data-count-to="500" data-count-suffix="+">0</div><div class="lbl">Properties Listed</div></div>
+    </div>
+    <div class="stat">
+      <svg class="si" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3"/><path d="M2 20c0-3.3 3.1-6 7-6s7 2.7 7 6"/><circle cx="17" cy="9" r="2.5"/></svg>
+      <div><div class="num" data-count-to="1200" data-count-suffix="+">0</div><div class="lbl">Happy Tenants</div></div>
+    </div>
+    <div class="stat">
+      <svg class="si" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+      <div><div class="num" data-count-to="180" data-count-suffix="+">0</div><div class="lbl">Landlords Managed</div></div>
+    </div>
+    <div class="stat">
+      <svg class="si" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="9" r="5"/><path d="M8 14l-2 7 6-3 6 3-2-7"/></svg>
+      <div><div class="num" data-count-to="10" data-count-suffix="+">0</div><div class="lbl">Years of Experience</div></div>
+    </div>
+  </div>
+</div>
+
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-col">
+      <div class="footer-logo">
+        <svg class="mark" viewBox="0 0 24 24" fill="none"><path d="M3 11L12 3L21 11" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M5 10V20H19V10" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
+        <span><span class="l1">Cherry Smart Homes</span></span>
+      </div>
+      <p>Smart property management and modern living in Kenya. Verified rentals, transparent pricing, and a dashboard built for landlords and tenants alike.</p>
+      <div class="socials">
+        <a href="#" aria-label="Facebook">f</a><a href="#" aria-label="Twitter">𝕏</a><a href="#" aria-label="Instagram">◎</a><a href="#" aria-label="LinkedIn">in</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Site</h5>
+      <ul>
+        <li><a href="index.html">Find a Home</a></li>
+        <li><a href="properties.html">Properties for Sale</a></li>
+        <li><a href="for-landlords.html">For Landlords</a></li>
+        <li><a href="about%20us.html#contact">Our Office</a></li>
+        <li><a href="tenant-portal.html">Tenant Portal</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li>0700 123 456</li>
+        <li>hello@cherrysmarthomes.co.ke</li>
+        <li>Mon – Sat, 8:00 AM – 6:00 PM</li>
+      </ul>
+      <h5 style="margin-top:26px;">Legal</h5>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Use</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Visit Our Office</h5>
+      <div class="footer-map">Map view — Kindaruma Road, Kilimani, Nairobi</div>
+      <p style="margin-bottom:0;">Kindaruma Road, Kilimani, Nairobi, Kenya</p>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© 2024 Cherry Smart Homes Ltd. All Rights Reserved.</span>
+    <div class="links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Use</a>
+      <a href="#">Sitemap</a>
+    </div>
+  </div>
+</footer>
+
+<a class="whatsapp-float" href="https://api.whatsapp.com/send?phone=254700123456&text=Hi,%20I'd%20like%20to%20book%20a%20viewing." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.1 8.1 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+</a>
+<div class="modal-overlay" id="booking-modal">
+  <div class="modal-card">
+    <button class="modal-close" data-close-booking-modal aria-label="Close">✕</button>
+    <h3>Book a Viewing</h3>
+    <p>Fill in your details and our team will call you to arrange a visit.</p>
+    <form onsubmit="return false;">
+      <div class="form-field">
+        <label for="bm-name">Full Name *</label>
+        <input id="bm-name" type="text" placeholder="Your name" required>
+      </div>
+      <div class="form-field">
+        <label for="bm-phone">Phone Number *</label>
+        <input id="bm-phone" type="tel" placeholder="07XX XXX XXX" required>
+      </div>
+      <div class="modal-btn-row">
+        <button type="submit" class="btn btn-red">Book Viewing</button>
+        <a href="https://api.whatsapp.com/send?phone=254700123456&text=Hi%2C%20I%27d%20like%20to%20book%20a%20viewing." target="_blank" rel="noopener" class="btn btn-outline">WhatsApp Inquiry</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="assets/js/main.js"></script>
+<script src="assets/js/pages/home.js"></script>
+</body>
+</html>

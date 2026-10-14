@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Airbnb & Short Stays in Nairobi — Cherry Smart Homes</title>
+<meta name="description" content="Furnished Airbnb and short-stay apartments in Nairobi. Pick your dates and guests, see the price per night and book on WhatsApp.">
+<meta property="og:title" content="Airbnb & Short Stays — Cherry Smart Homes">
+<meta property="og:description" content="Furnished, clean and ready short stays in Nairobi. Book on WhatsApp.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+
+<style>
+/* ===== Header (same as other pages) ===== */
+.csh-header,.pf-page{
+  --csh-green:#1f9d55;--csh-green-dark:#177a42;--csh-gold:#c8962b;
+  --csh-ink:#121a24;--csh-muted:#4b5563;--csh-line:#e5e7eb;
+  --csh-h:64px;--csh-radius:10px;
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--csh-ink)
+}
+.csh-header *,.pf-page *,.csh-header *::before,.pf-page *::before{box-sizing:border-box}
+.csh-header a,.pf-page a{text-decoration:none;color:inherit}
+.csh-header :focus-visible,.pf-page :focus-visible{outline:3px solid var(--csh-gold);outline-offset:2px;border-radius:6px}
+.csh-wrap{width:100%;max-width:1200px;margin:0 auto;padding:0 20px}
+.csh-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:var(--csh-radius);font:600 16px/1 Inter,sans-serif;border:1.5px solid transparent;cursor:pointer;text-align:center;transition:background .2s,color .2s,border-color .2s}
+.csh-btn-primary{background:var(--csh-green);color:#fff!important}
+.csh-btn-primary:hover{background:var(--csh-green-dark)}
+.csh-btn-outline{background:#fff;color:var(--csh-ink);border-color:var(--csh-ink)}
+.csh-btn-outline:hover{background:var(--csh-ink);color:#fff}
+.csh-header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid var(--csh-line);padding-top:env(safe-area-inset-top,0px)}
+.csh-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;height:var(--csh-h)}
+.csh-logo img{height:46px;width:auto}
+.csh-actions{display:flex;align-items:center;gap:8px}
+.csh-wa{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;min-width:44px;padding:0 12px;border-radius:var(--csh-radius);background:var(--csh-green);color:#fff!important;font-weight:600;font-size:14px}
+.csh-wa-text{display:none}
+.csh-header .nav-toggle{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;border:1px solid var(--csh-line);border-radius:var(--csh-radius);background:#fff;color:var(--csh-ink);cursor:pointer}
+.csh-nav{position:fixed;inset:calc(var(--csh-h) + env(safe-area-inset-top,0px)) 0 0 0;background:#fff;display:flex;flex-direction:column;padding:12px 20px calc(24px + env(safe-area-inset-bottom,0px));overflow-y:auto;transform:translateX(100%);visibility:hidden;transition:transform .25s ease,visibility .25s}
+.csh-nav.open{transform:none;visibility:visible}
+.csh-nav a{display:flex;align-items:center;min-height:56px;font-size:18px;font-weight:500;border-bottom:1px solid var(--csh-line)}
+.csh-nav a.active{color:var(--csh-green);font-weight:700}
+.csh-nav .csh-portal{margin-top:20px;justify-content:center;border:1.5px solid var(--csh-ink);border-radius:var(--csh-radius);font-size:16px;font-weight:600}
+body.csh-menu-open{overflow:hidden}
+
+/* ===== Airbnb page ===== */
+.pf-page section{padding:44px 0}
+.pf-page h2{margin:0 0 10px;font-size:clamp(1.4rem,5vw,2rem);line-height:1.15;font-weight:800;letter-spacing:-.01em}
+.pf-page p{line-height:1.65}
+.pf-eyebrow{display:inline-block;margin-bottom:8px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--csh-green-dark)}
+.pf-top{position:relative;background:#f6f8f7;padding:28px 0 32px!important;overflow:hidden}
+.pf-top::before{content:"";position:absolute;inset:0;background:url("https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=70&w=900&auto=format&fit=crop") center/cover;opacity:.18}
+.pf-top::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.9),rgba(246,248,247,.95))}
+.pf-top .csh-wrap{position:relative;z-index:1}
+.pf-top h1{margin:0 0 8px;font-size:clamp(1.9rem,7vw,3.1rem);line-height:1.1;font-weight:800;letter-spacing:-.02em;max-width:18ch}
+.pf-top .lead{margin:0 0 20px;color:var(--csh-muted);max-width:56ch}
+.pf-crumbs{font-size:13px;color:var(--csh-muted);margin-bottom:10px}
+.pf-crumbs a:hover{color:var(--csh-green-dark)}
+
+.bn-search{background:#fff;border:1px solid var(--csh-line);border-radius:14px;padding:16px;box-shadow:0 10px 30px rgba(18,26,36,.08);max-width:1000px}
+.pf-fields{display:grid;gap:12px;grid-template-columns:1fr}
+.pf-field label{display:block;margin-bottom:6px;font-size:13px;font-weight:600;color:var(--csh-muted)}
+.pf-field input,.pf-field select{width:100%;height:50px;margin:0;padding:0 14px;border:1.5px solid var(--csh-line);border-radius:var(--csh-radius);background:#fff;color:var(--csh-ink);font:500 16px Inter,sans-serif;appearance:none;-webkit-appearance:none;min-width:0}
+.pf-field input[type=date]{display:block}
+.pf-field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%234b5563' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:38px}
+.pf-field input:focus,.pf-field select:focus{border-color:var(--csh-green);outline:none;box-shadow:0 0 0 3px rgba(31,157,85,.18)}
+.bn-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;flex-wrap:wrap}
+.pf-count{font-size:14px;color:var(--csh-muted);font-weight:500}
+.pf-reset{background:none;border:0;padding:10px 0;color:var(--csh-green-dark);font:600 15px Inter,sans-serif;cursor:pointer;text-decoration:underline}
+
+.pf-grid{display:grid;gap:18px;grid-template-columns:1fr}
+.pf-card{background:#fff;border:1px solid var(--csh-line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .2s,transform .2s}
+.pf-card:hover{box-shadow:0 12px 30px rgba(18,26,36,.1);transform:translateY(-2px)}
+.pf-img{position:relative;aspect-ratio:4/3;background:#e5e7eb}
+.pf-img img{width:100%;height:100%;object-fit:cover;display:block}
+.pf-badge{position:absolute;left:12px;top:12px;background:var(--csh-green);color:#fff;font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px}
+.pf-badge.new{background:var(--csh-gold)}
+.pf-save{position:absolute;right:10px;top:10px;width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.95);color:var(--csh-ink);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.pf-save[aria-pressed="true"]{color:#e11d48}
+.pf-save[aria-pressed="true"] svg{fill:currentColor}
+.pf-body{padding:16px;display:flex;flex-direction:column;gap:6px;flex:1}
+.pf-price{font-size:1.4rem;font-weight:800}
+.pf-price small{font-size:.9rem;font-weight:500;color:var(--csh-muted)}
+.bn-total{font-size:13px;font-weight:600;color:var(--csh-green-dark);min-height:18px}
+.pf-title{margin:0;font-size:1rem;font-weight:600}
+.pf-loc{display:flex;align-items:center;gap:6px;color:var(--csh-muted);font-size:14px}
+.pf-specs{display:flex;flex-wrap:wrap;gap:6px 16px;margin:6px 0 4px;padding:10px 0;border-top:1px solid var(--csh-line);font-size:14px;color:var(--csh-muted)}
+.pf-specs span{display:inline-flex;align-items:center;gap:6px}
+.pf-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.pf-tags span{font-size:12px;font-weight:600;color:var(--csh-green-dark);background:#e8f6ee;padding:4px 10px;border-radius:999px}
+.pf-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:auto}
+.pf-btns .csh-btn{min-height:46px;padding:0 10px;font-size:15px}
+.pf-empty{display:none;text-align:center;padding:56px 16px;border:1.5px dashed var(--csh-line);border-radius:14px}
+.pf-empty.show{display:block}
+.pf-empty h2{margin:0 0 8px;font-size:1.3rem}
+.pf-empty p{margin:0 0 16px;color:var(--csh-muted)}
+.pf-note{margin-top:24px;font-size:13px;color:var(--csh-muted)}
+
+/* Why us / FAQ / CTA */
+.bn-alt{background:#f6f8f7}
+.bn-why{display:grid;gap:14px;margin-top:20px}
+.bn-card{background:#fff;border:1px solid var(--csh-line);border-radius:14px;padding:20px}
+.bn-card h3{margin:0 0 6px;font-size:1.05rem}
+.bn-card p{margin:0;color:var(--csh-muted);font-size:15px}
+.bn-ico{width:44px;height:44px;border-radius:12px;background:#e8f6ee;color:var(--csh-green-dark);display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.bn-faq{max-width:780px;margin-top:20px}
+.bn-faq details{border:1px solid var(--csh-line);border-radius:12px;background:#fff;margin-bottom:10px}
+.bn-faq summary{list-style:none;cursor:pointer;min-height:56px;padding:14px 16px;font-weight:600;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.bn-faq summary::-webkit-details-marker{display:none}
+.bn-faq summary::after{content:"+";font-size:22px;font-weight:500;color:var(--csh-green-dark);flex:none}
+.bn-faq details[open] summary::after{content:"–"}
+.bn-faq details p{margin:0;padding:0 16px 16px;color:var(--csh-muted)}
+.bn-cta{background:var(--csh-ink);color:#fff;border-radius:16px;padding:28px 20px;text-align:center}
+.bn-cta h2{color:#fff}
+.bn-cta p{color:#cbd5e1;max-width:48ch;margin:0 auto 18px}
+.bn-cta-btns{display:grid;gap:10px;max-width:420px;margin:0 auto}
+
+/* Booking dialog */
+.pf-dialog{width:min(480px,calc(100% - 24px));max-height:calc(100% - 24px);padding:22px 20px;border:0;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.3);font-family:Inter,sans-serif;color:var(--csh-ink)}
+.pf-dialog::backdrop{background:rgba(18,26,36,.55)}
+.pf-dialog h3{margin:0 0 4px;font-size:1.25rem}
+.pf-dialog .ref{margin:0 0 14px;color:var(--csh-muted);font-size:14px}
+.pf-dialog form{display:grid;gap:12px}
+.pf-dialog .two{display:grid;gap:12px;grid-template-columns:1fr 1fr}
+.pf-dialog .x{position:absolute;right:10px;top:10px;width:44px;height:44px;border:0;background:none;font-size:20px;cursor:pointer;color:var(--csh-muted)}
+.bn-est{padding:12px 14px;border-radius:var(--csh-radius);background:#e8f6ee;color:var(--csh-green-dark);font-weight:600;font-size:15px}
+.bn-err{color:#b91c1c;font-size:14px;min-height:18px;margin:0}
+
+@media (min-width:640px){
+  .csh-wa-text{display:inline}
+  .pf-fields{grid-template-columns:1fr 1fr}
+  .pf-grid{grid-template-columns:repeat(2,1fr)}
+  .bn-why{grid-template-columns:1fr 1fr}
+  .bn-cta-btns{grid-template-columns:1fr 1fr}
+}
+@media (min-width:992px){
+  .csh-header,.pf-page{--csh-h:76px}
+  .csh-logo img{height:54px}
+  .csh-header .nav-toggle{display:none}
+  .csh-nav{position:static;flex-direction:row;align-items:center;gap:6px;padding:0;overflow:visible;transform:none;visibility:visible;background:none}
+  .csh-nav a{min-height:44px;padding:0 12px;font-size:16px;border-bottom:0;border-radius:8px}
+  .csh-nav a:hover{background:#f3f4f6}
+  .csh-nav .csh-portal{margin:0 0 0 6px;padding:0 16px;font-size:15px}
+  .pf-page section{padding:64px 0}
+  .pf-top{padding:56px 0 48px!important}
+  .pf-fields{grid-template-columns:1.3fr 1fr 1fr .8fr 1fr 1fr}
+  .pf-grid{grid-template-columns:repeat(3,1fr);gap:22px}
+  .bn-why{grid-template-columns:repeat(4,1fr)}
+}
+@media (prefers-reduced-motion:reduce){.csh-nav,.pf-card{transition:none}}
+</style>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="csh-header">
+  <div class="csh-wrap csh-bar">
+    <a href="index.html" class="csh-logo" aria-label="Cherry Smart Homes home">
+      <img src="logo.png" width="205" height="54" alt="Cherry Smart Homes — Find your next home">
+    </a>
+    <nav id="site-nav" class="csh-nav" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="properties.html">Properties for Sale</a>
+      <a href="rentals.html">Rentals</a>
+      <a href="bnb.html" class="active" aria-current="page">Airbnb</a>
+      <a href="for-landlords.html">For Landlords</a>
+      <a href="about%20us.html">About Us</a>
+      <a href="tenant-portal.html" class="csh-portal">Tenant Portal</a>
+    </nav>
+    <div class="csh-actions">
+      <a class="csh-wa" target="_blank" rel="noopener"
+         href="https://api.whatsapp.com/send?phone=254700123456&text=Hi%2C%20I%27d%20like%20to%20book%20a%20short%20stay."
+         aria-label="Chat with us on WhatsApp">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.1 8.1 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+        <span class="csh-wa-text">Chat on WhatsApp</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="pf-page">
+
+  <!-- Hero + search -->
+  <section class="pf-top">
+    <div class="csh-wrap">
+      <div class="pf-crumbs"><a href="index.html">Home</a> / Airbnb &amp; Short Stays</div>
+      <h1>Furnished short stays in Nairobi.</h1>
+      <p class="lead">Clean, comfortable and ready to move in. Pick your dates and guests, see the price per night, and book on WhatsApp.</p>
+
+      <form class="bn-search" id="filters" onsubmit="return false" aria-label="Search short stays">
+        <div class="pf-fields">
+          <div class="pf-field">
+            <label for="f-area">Area</label>
+            <input id="f-area" type="search" list="areas" placeholder="e.g. Kilimani" autocomplete="off">
+            <datalist id="areas"><option value="Kilimani"><option value="Westlands"><option value="Lavington"><option value="Ruaka"><option value="Karen"></datalist>
+          </div>
+          <div class="pf-field"><label for="f-in">Check-in</label><input id="f-in" type="date"></div>
+          <div class="pf-field"><label for="f-out">Check-out</label><input id="f-out" type="date"></div>
+          <div class="pf-field">
+            <label for="f-guests">Guests</label>
+            <select id="f-guests">
+              <option value="1">1</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option>
+              <option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8+</option>
+            </select>
+          </div>
+          <div class="pf-field">
+            <label for="f-price">Price per night</label>
+            <select id="f-price">
+              <option value="">Any price</option>
+              <option value="0-4000">Under KES 4,000</option>
+              <option value="4000-8000">KES 4,000 – 8,000</option>
+              <option value="8000-15000">KES 8,000 – 15,000</option>
+              <option value="15000-">Above KES 15,000</option>
+            </select>
+          </div>
+          <div class="pf-field">
+            <label for="f-sort">Sort by</label>
+            <select id="f-sort">
+              <option value="featured">Featured</option>
+              <option value="low">Price: low to high</option>
+              <option value="high">Price: high to low</option>
+            </select>
+          </div>
+        </div>
+        <div class="bn-row">
+          <span class="pf-count" id="count" aria-live="polite"></span>
+          <button type="button" class="pf-reset" id="reset">Clear filters</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Listings -->
+  <section id="stays" style="padding-top:28px">
+    <div class="csh-wrap">
+      <div class="pf-grid" id="grid"></div>
+      <div class="pf-empty" id="empty">
+        <h2>No stays match your search</h2>
+        <p>Try fewer guests, a wider price range or another area. Or tell us your dates and we'll find something for you.</p>
+        <a class="csh-btn csh-btn-primary" target="_blank" rel="noopener" href="https://api.whatsapp.com/send?phone=254700123456&text=Hi%2C%20I%27m%20looking%20for%20a%20short%20stay%20in%20Nairobi.">Ask us on WhatsApp</a>
+      </div>
+      <p class="pf-note">Prices are per night in Kenya shillings. Availability is confirmed on WhatsApp before you pay.</p>
+    </div>
+  </section>
+
+  <!-- Why stay with us -->
+  <section class="bn-alt">
+    <div class="csh-wrap">
+      <span class="pf-eyebrow">Why book with us</span>
+      <h2>Stay easy from check-in to check-out</h2>
+      <div class="bn-why">
+        <div class="bn-card"><div class="bn-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5l8-3z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>Verified places</h3><p>Every stay is checked by our team, so what you see is what you get.</p></div>
+        <div class="bn-card"><div class="bn-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12l5 5L20 7"/></svg></div><h3>Cleaned every time</h3><p>Fresh linen and a clean space before every guest arrives.</p></div>
+        <div class="bn-card"><div class="bn-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8.5a15 15 0 0 1 20 0M5 12a10 10 0 0 1 14 0M8.5 15.5a5 5 0 0 1 7 0"/><circle cx="12" cy="19" r="1" fill="currentColor"/></svg></div><h3>Fast WiFi and basics</h3><p>WiFi, hot shower and a kitchen, so you can work or relax from day one.</p></div>
+        <div class="bn-card"><div class="bn-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.9A8 8 0 1 1 21 12z"/></svg></div><h3>Real people on WhatsApp</h3><p>Questions before or during your stay? We reply fast, 7 days a week.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section>
+    <div class="csh-wrap">
+      <span class="pf-eyebrow">Good to know</span>
+      <h2>Common questions</h2>
+      <div class="bn-faq">
+        <!-- EDIT these answers to match your real policies -->
+        <details><summary>How do I book?</summary><p>Choose a stay, enter your dates and tap Book on WhatsApp. We confirm availability and share payment details.</p></details>
+        <details><summary>How do I pay?</summary><p>You can pay by M-Pesa. We'll send you the details on WhatsApp once your dates are confirmed.</p></details>
+        <details><summary>What are check-in and check-out times?</summary><p>Check-in is from 2:00 PM and check-out is by 11:00 AM. Ask us if you need an early arrival or late departure.</p></details>
+        <details><summary>Can I cancel or change my dates?</summary><p>Yes, message us as early as you can. Our cancellation terms are shared when you book.</p></details>
+        <details><summary>Is there parking and security?</summary><p>Most of our stays have secure parking and 24-hour security. Check the tags on each listing.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Host CTA -->
+  <section style="padding-top:0">
+    <div class="csh-wrap">
+      <div class="bn-cta">
+        <h2>Own a property in Nairobi?</h2>
+        <p>Let us run it as a short stay: listing, guests, cleaning and payments, while you track everything on your owner dashboard.</p>
+        <div class="bn-cta-btns">
+          <a class="csh-btn csh-btn-primary" href="for-landlords.html">List your property</a>
+          <a class="csh-btn csh-btn-outline" target="_blank" rel="noopener" href="https://api.whatsapp.com/send?phone=254700123456&text=Hi%2C%20I%27d%20like%20you%20to%20manage%20my%20property%20as%20an%20Airbnb.">Talk to us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Booking dialog -->
+<dialog class="pf-dialog" id="enquiry" aria-labelledby="enq-title">
+  <button class="x" type="button" id="enq-close" aria-label="Close">✕</button>
+  <h3 id="enq-title">Book this stay</h3>
+  <p class="ref" id="enq-ref"></p>
+  <form id="enq-form" novalidate>
+    <div class="two">
+      <div class="pf-field"><label for="e-in">Check-in *</label><input id="e-in" type="date" required></div>
+      <div class="pf-field"><label for="e-out">Check-out *</label><input id="e-out" type="date" required></div>
+    </div>
+    <div class="pf-field"><label for="e-guests">Guests</label><select id="e-guests"></select></div>
+    <div class="pf-field"><label for="e-name">Full name *</label><input id="e-name" required autocomplete="name" placeholder="Your name"></div>
+    <div class="pf-field"><label for="e-phone">Phone number *</label><input id="e-phone" type="tel" inputmode="tel" required autocomplete="tel" placeholder="07XX XXX XXX"></div>
+    <div class="bn-est" id="e-est" aria-live="polite">Choose your dates to see the estimate</div>
+    <p class="bn-err" id="e-err" role="alert"></p>
+    <button class="csh-btn csh-btn-primary" type="submit">Book on WhatsApp</button>
+  </form>
+</dialog>
+
+<!-- ================= FOOTER ================= -->
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-col">
+      <div class="footer-logo">
+        <svg class="mark" viewBox="0 0 24 24" fill="none"><path d="M3 11L12 3L21 11" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M5 10V20H19V10" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
+        <span><span class="l1">Cherry Smart Homes</span></span>
+      </div>
+      <p>Smart property management and modern living in Kenya. Verified rentals, transparent pricing, and a dashboard built for landlords and tenants alike.</p>
+      <div class="socials">
+        <a href="#" aria-label="Facebook">f</a><a href="#" aria-label="Twitter">𝕏</a><a href="#" aria-label="Instagram">◎</a><a href="#" aria-label="LinkedIn">in</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Site</h5>
+      <ul>
+        <li><a href="index.html">Find a Home</a></li>
+        <li><a href="rentals.html">Rentals</a></li>
+        <li><a href="properties.html">Properties for Sale</a></li>
+        <li><a href="bnb.html">Airbnb</a></li>
+        <li><a href="for-landlords.html">For Landlords</a></li>
+        <li><a href="about%20us.html">About Us</a></li>
+        <li><a href="tenant-portal.html">Tenant Portal</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li>0700 123 456</li>
+        <li>hello@cherrysmarthomes.co.ke</li>
+        <li>Mon – Sat, 8:00 AM – 6:00 PM</li>
+      </ul>
+      <h5 style="margin-top:26px;">Legal</h5>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Use</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Visit Our Office</h5>
+      <p style="margin-bottom:8px;">Kindaruma Road, Kilimani, Nairobi, Kenya</p>
+      <a href="about%20us.html#contact">Get directions →</a>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© 2026 Cherry Smart Homes Ltd. All Rights Reserved.</span>
+    <div class="links"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a><a href="#">Sitemap</a></div>
+  </div>
+</footer>
+
+<a class="whatsapp-float" href="https://api.whatsapp.com/send?phone=254700123456&text=Hi,%20I'd%20like%20to%20book%20a%20short%20stay." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.1 8.1 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+</a>
+
+<script src="assets/js/data/stays.js"></script>
+<script>
+(function(){
+  var PHONE='254700123456'; // replace with your real WhatsApp number
+
+  /* ---------- SAMPLE STAYS: replace with your real Airbnb units ---------- */
+  var STAYS=Object.keys(window.CSH_STAYS).map(function(id){return window.CSH_STAYS[id]});
+
+  var $=function(id){return document.getElementById(id)};
+  function kes(n){return 'KES '+n.toLocaleString('en-KE')}
+  function pad(n){return n<10?'0'+n:''+n}
+  function ymd(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())}
+  function parse(v){return v?new Date(v+'T00:00:00'):null}
+  function nightsBetween(a,b){var x=parse(a),y=parse(b);return(x&&y)?Math.round((y-x)/864e5):0}
+  function addDays(v,n){var d=parse(v);d.setDate(d.getDate()+n);return ymd(d)}
+  function fmtDate(v){return parse(v).toLocaleDateString('en-KE',{day:'numeric',month:'short',year:'numeric'})}
+
+  var icons={
+    guest:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M2 20c0-3.3 3.1-6 7-6s7 2.7 7 6"/><circle cx="17" cy="9" r="2.5"/></svg>',
+    bed:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 18v-7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v7M3 15h18M7 9V6h4v3"/></svg>',
+    bath:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 12h18v2a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5v-2zM6 12V6a2 2 0 0 1 4 0"/></svg>',
+    pin:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>',
+    heart:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z"/></svg>'
+  };
+
+  var saved=[];
+  try{saved=JSON.parse(localStorage.getItem('csh-saved-bnb')||'[]')}catch(e){}
+  function persist(){try{localStorage.setItem('csh-saved-bnb',JSON.stringify(saved))}catch(e){}}
+
+  /* ---------- Dates: no past dates, checkout after checkin ---------- */
+  var f={area:$('f-area'),inn:$('f-in'),out:$('f-out'),guests:$('f-guests'),price:$('f-price'),sort:$('f-sort')};
+  var today=ymd(new Date());
+  f.inn.min=today;f.out.min=today;
+  f.inn.addEventListener('change',function(){
+    if(f.inn.value){f.out.min=addDays(f.inn.value,1);if(!f.out.value||f.out.value<=f.inn.value)f.out.value=addDays(f.inn.value,1)}
+    apply();
+  });
+
+  function apply(){
+    var area=f.area.value.trim().toLowerCase(),
+        g=+f.guests.value||1,
+        range=f.price.value?f.price.value.split('-'):null;
+    var list=STAYS.filter(function(s){
+      if(area&&s.area.toLowerCase().indexOf(area)===-1)return false;
+      if(s.guests<g)return false;
+      if(range){var lo=+range[0]||0,hi=range[1]?+range[1]:Infinity;if(s.price<lo||s.price>=hi)return false}
+      return true;
+    });
+    if(f.sort.value==='low')list.sort(function(a,b){return a.price-b.price});
+    if(f.sort.value==='high')list.sort(function(a,b){return b.price-a.price});
+    render(list);
+  }
+
+  function render(list){
+    var n=nightsBetween(f.inn.value,f.out.value);
+    $('count').textContent=list.length+(list.length===1?' stay':' stays')+(n>0?' · '+n+' night'+(n>1?'s':''):'');
+    $('empty').classList.toggle('show',!list.length);
+    $('grid').innerHTML=list.map(function(s,i){
+      var isSaved=saved.indexOf(s.id)>-1;
+      return '<article class="pf-card">'+
+        '<div class="pf-img"><img src="'+s.img+'" alt="'+s.title+' in '+s.area+'" loading="'+(i<2?'eager':'lazy')+'" width="700" height="525">'+
+          (s.badge?'<span class="pf-badge'+(s.badge==='New'?' new':'')+'">'+s.badge+'</span>':'')+
+          '<button class="pf-save" type="button" data-save="'+s.id+'" aria-pressed="'+isSaved+'" aria-label="Save '+s.title+'">'+icons.heart+'</button></div>'+
+        '<div class="pf-body">'+
+          '<div class="pf-price">'+kes(s.price)+' <small>/night</small></div>'+
+          '<div class="bn-total">'+(n>0?n+' night'+(n>1?'s':'')+' · '+kes(n*s.price)+' total':'')+'</div>'+
+          '<h2 class="pf-title">'+s.title+'</h2>'+
+          '<div class="pf-loc">'+icons.pin+s.area+', Nairobi</div>'+
+          '<div class="pf-specs"><span>'+icons.guest+'Up to '+s.guests+'</span><span>'+icons.bed+s.beds+' Bedroom'+(s.beds>1?'s':'')+'</span><span>'+icons.bath+s.baths+' Bath'+(s.baths>1?'s':'')+'</span></div>'+
+          '<div class="pf-tags">'+s.tags.map(function(t){return '<span>'+t+'</span>'}).join('')+'</div>'+
+          '<div class="pf-btns"><a class="csh-btn csh-btn-outline" href="bnb-detail.html?id='+s.id+'">View details</a>'+
+          '<button class="csh-btn csh-btn-primary" type="button" data-book="'+s.id+'">Book now</button></div>'+
+        '</div></article>';
+    }).join('');
+  }
+
+  ['input','change'].forEach(function(ev){Object.keys(f).forEach(function(k){f[k].addEventListener(ev,apply)})});
+  $('reset').addEventListener('click',function(){f.area.value='';f.inn.value='';f.out.value='';f.out.min=today;f.guests.value='2';f.price.value='';f.sort.value='featured';apply()});
+
+  /* Pre-fill from URL (?area=&checkin=&checkout=&guests=) */
+  var q=new URLSearchParams(location.search);
+  if(q.get('area'))f.area.value=q.get('area');
+  if(q.get('guests')&&/^[1-8]$/.test(q.get('guests')))f.guests.value=q.get('guests');
+  var ci=q.get('checkin'),co=q.get('checkout');
+  if(ci&&/^\d{4}-\d{2}-\d{2}$/.test(ci)&&ci>=today){f.inn.value=ci;f.out.min=addDays(ci,1);
+    if(co&&/^\d{4}-\d{2}-\d{2}$/.test(co)&&co>ci)f.out.value=co;else f.out.value=addDays(ci,1)}
+
+  /* ---------- Booking dialog ---------- */
+  var dlg=$('enquiry'),cur=null,e={inn:$('e-in'),out:$('e-out'),g:$('e-guests'),est:$('e-est'),err:$('e-err')};
+  e.inn.min=today;
+  function estimate(){
+    var n=nightsBetween(e.inn.value,e.out.value);
+    e.est.textContent=n>0?n+' night'+(n>1?'s':'')+' × '+kes(cur.price)+' = '+kes(n*cur.price):'Choose your dates to see the estimate';
+  }
+  e.inn.addEventListener('change',function(){
+    if(e.inn.value){e.out.min=addDays(e.inn.value,1);if(!e.out.value||e.out.value<=e.inn.value)e.out.value=addDays(e.inn.value,1)}
+    estimate();
+  });
+  e.out.addEventListener('change',estimate);
+
+  $('grid').addEventListener('click',function(ev){
+    var s=ev.target.closest('[data-save]');
+    if(s){var id=s.getAttribute('data-save'),i=saved.indexOf(id);
+      if(i>-1)saved.splice(i,1);else saved.push(id);
+      s.setAttribute('aria-pressed',i===-1);persist();return}
+    var b=ev.target.closest('[data-book]');
+    if(b){
+      cur=STAYS.filter(function(x){return x.id===b.getAttribute('data-book')})[0];
+      $('enq-ref').textContent=cur.title+' · '+cur.area+' · '+kes(cur.price)+'/night (Ref '+cur.id+')';
+      e.g.innerHTML='';
+      for(var i2=1;i2<=cur.guests;i2++){var o=document.createElement('option');o.value=i2;o.textContent=i2+(i2===1?' guest':' guests');e.g.appendChild(o)}
+      e.g.value=Math.min(+f.guests.value||2,cur.guests);
+      e.inn.value=f.inn.value;e.out.value=f.out.value;e.out.min=f.inn.value?addDays(f.inn.value,1):addDays(today,1);
+      e.err.textContent='';estimate();
+      if(dlg.showModal)dlg.showModal();else dlg.setAttribute('open','');
+    }
+  });
+  $('enq-close').addEventListener('click',function(){dlg.close()});
+  dlg.addEventListener('click',function(ev){if(ev.target===dlg)dlg.close()});
+
+  $('enq-form').addEventListener('submit',function(ev){
+    ev.preventDefault();
+    var name=$('e-name').value.trim(),phone=$('e-phone').value.trim(),n=nightsBetween(e.inn.value,e.out.value);
+    if(!e.inn.value||!e.out.value||n<1){e.err.textContent='Please choose a check-out date after check-in.';return}
+    if(e.inn.value<today){e.err.textContent='Check-in cannot be in the past.';return}
+    if(!name||!phone){e.err.textContent='Please enter your name and phone number.';return}
+    e.err.textContent='';
+    var msg='Hi Cherry Smart Homes, I would like to book a short stay:\n'+cur.title+' in '+cur.area+' (Ref '+cur.id+')\n'+
+            'Check-in: '+fmtDate(e.inn.value)+'\nCheck-out: '+fmtDate(e.out.value)+' ('+n+' night'+(n>1?'s':'')+')\n'+
+            'Guests: '+e.g.value+'\nEstimate: '+kes(n*cur.price)+'\n\nName: '+name+'\nPhone: '+phone+'\n\nIs it available?';
+    window.open('https://api.whatsapp.com/send?phone='+PHONE+'&text='+encodeURIComponent(msg),'_blank','noopener');
+    dlg.close();
+  });
+
+  /* ---------- Mobile nav ---------- */
+  var toggle=document.querySelector('.csh-header .nav-toggle'),nav=$('site-nav');
+  function setMenu(o){nav.classList.toggle('open',o);document.body.classList.toggle('csh-menu-open',o);toggle.setAttribute('aria-expanded',o);toggle.setAttribute('aria-label',o?'Close menu':'Open menu')}
+  toggle.addEventListener('click',function(){setMenu(!nav.classList.contains('open'))});
+  nav.addEventListener('click',function(ev){if(ev.target.closest('a'))setMenu(false)});
+  document.addEventListener('keydown',function(ev){if(ev.key==='Escape')setMenu(false)});
+  window.matchMedia('(min-width:992px)').addEventListener('change',function(ev){if(ev.matches)setMenu(false)});
+
+  apply();
+})();
+</script>
+</body>
+</html>

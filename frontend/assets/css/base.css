@@ -1,0 +1,57 @@
+/* ============================================
+   CHERRY SMART HOMES — BASE.CSS
+   Resets, design tokens, typography. Loaded on every page, first.
+   ============================================ */
+
+:root{
+  /* Brand colors */
+  --red: #E5483B;
+  --red-dark: #C93A2E;
+  --ink: #12181F;
+  --ink-2: #1C232D;
+  --grey-bg: #F4F5F7;
+  --line: #E7E8EC;
+  --muted: #6B7280;
+  --white: #FFFFFF;
+  --green: #21A15E;
+  --whatsapp-green: #25D366;
+
+  /* Layout */
+  --radius: 10px;
+  --shadow: 0 10px 30px -12px rgba(18,24,31,0.15);
+  --container-width: 1280px;
+}
+
+*{ box-sizing:border-box; margin:0; padding:0; }
+html{ scroll-behavior:smooth; }
+
+body{
+  font-family:'Inter', sans-serif;
+  color:var(--ink);
+  background:var(--white);
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+
+img{ display:block; max-width:100%; }
+a{ text-decoration:none; color:inherit; }
+ul{ list-style:none; }
+button{ font-family:inherit; cursor:pointer; border:none; background:none; }
+select, input, textarea{ font-family:inherit; }
+
+.container{
+  max-width:var(--container-width);
+  margin:0 auto;
+  padding:0 32px;
+}
+
+.icon{ width:18px; height:18px; flex-shrink:0; }
+
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible{
+  outline:2px solid var(--red-dark);
+  outline-offset:2px;
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{ scroll-behavior:auto !important; animation:none !important; transition:none !important; }
+}

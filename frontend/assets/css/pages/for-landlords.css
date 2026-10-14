@@ -1,0 +1,45 @@
+/* ============================================
+   FOR-LANDLORDS.CSS — styles unique to for-landlords.html
+   ============================================ */
+
+.landlord-hero{ background:var(--ink); color:#fff; padding:64px 0; }
+.landlord-hero-grid{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:50px; align-items:center; }
+.landlord-hero h1{ font-size:34px; font-weight:800; text-transform:uppercase; line-height:1.2; margin-bottom:16px; }
+.landlord-hero p{ color:rgba(255,255,255,0.7); font-size:15px; margin-bottom:28px; max-width:460px; line-height:1.7; }
+.landlord-hero-img{ border-radius:16px; overflow:hidden; height:280px; }
+.landlord-hero-img img{ width:100%; height:100%; object-fit:cover; }
+
+.process-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:24px; }
+.process-step{ text-align:center; }
+.process-step .step-num{
+  width:44px; height:44px; border-radius:50%; background:var(--ink); color:var(--red); font-weight:800;
+  display:flex; align-items:center; justify-content:center; margin:0 auto 16px; font-size:16px;
+}
+.process-step h4{ font-size:14.5px; font-weight:800; color:var(--ink); margin-bottom:8px; text-transform:uppercase; }
+.process-step p{ font-size:13px; color:var(--muted); }
+
+/* LIST YOUR PROPERTY FORM */
+.list-form-section{ background:var(--grey-bg); padding:80px 0; }
+.list-form-card{ background:#fff; border-radius:var(--radius); padding:40px; max-width:640px; margin:0 auto; box-shadow:var(--shadow); }
+.list-form-card h2{ font-size:22px; font-weight:800; color:var(--ink); text-transform:uppercase; margin-bottom:6px; text-align:center; }
+.list-form-card > p{ text-align:center; color:var(--muted); font-size:13.5px; margin-bottom:28px; }
+.list-form-row{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
+.list-form-field{ display:flex; flex-direction:column; gap:6px; }
+.list-form-field.full{ grid-column:1 / -1; }
+.list-form-field label{ font-size:12.5px; font-weight:600; color:var(--ink); }
+.list-form-field input, .list-form-field select, .list-form-field textarea{
+  padding:11px 14px; border:1px solid var(--line); border-radius:6px; font-size:13.5px; font-family:inherit;
+}
+.list-form-field textarea{ resize:vertical; min-height:90px; }
+.list-form-field input:focus, .list-form-field select:focus, .list-form-field textarea:focus{ outline:none; border-color:var(--red); }
+
+@media (max-width: 1080px){
+  .landlord-hero-grid{ grid-template-columns:1fr; }
+  .landlord-hero-img{ order:-1; }
+  .process-grid{ grid-template-columns:1fr 1fr; gap:32px 20px; }
+}
+@media (max-width: 760px){
+  .process-grid{ grid-template-columns:1fr; }
+  .list-form-row{ grid-template-columns:1fr; }
+  .list-form-card{ padding:26px; }
+}
